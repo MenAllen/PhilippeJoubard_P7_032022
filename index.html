@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Les Petits Plats" />
+		<meta name="keywords" content="recettes de cuisine" />
+
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+			crossorigin="anonymous"
+		/>
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+		<link rel="icon" type="image/svg" href="assets/icons/favicon.svg" />
+		<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+		<script src="https://kit.fontawesome.com/fe6a60c3cf.js" crossorigin="anonymous"></script>
+
+		<title>Les Petits Plats</title>
+	</head>
+	<body>
+		<header>
+			<div class="container mt-4">
+
+				<!-- Logo Les petits plats -->
+				<div class="d-flex flex-column align-items-center">
+					<img src="assets/icons/vector.svg" class="header-logo" alt="logo les petits plats" />
+					<h1 class="header-titre">Les petits plats</h1>
+				</div>
+
+			</div>
+
+			</div>
+		</header>
+
+		<main role="main">
+
+			<!-- Recherche de recettes avec filtres ingrédients, Appareils et ustenseiles -->
+			<div class="container mt-3 p-0">
+
+				<form>
+					<!-- Barre de recherche -->
+					<div class="input-group">
+						<input type="text" class="form-control bg-secondary input-Search font-Lato18" placeholder="Rechercher une recette" />
+						<div class="input-btn btn-Search">
+							<i class="fa fa-search fa-2x"></i>
+						</div>
+					</div>
+			
+					<div mt-3></div>
+
+					<!-- Dropdown menus -->
+					<div class="row mt-3 p-0">
+
+						<!-- Menu Ingredients -->
+						<div class="input-group input-Width">
+								<input type="text" class="form-control bg-blue input-Filters font-Lato18" placeholder="Ingredients"/>
+								<div class="input-btn bg-blue btn-Filters">
+									<img src="assets/icons/chevron.svg" alt="chevron bas">
+								</div>
+						</div>
+
+						<!-- Menu Appareils -->
+						<div class="input-group input-Width">
+							<input type="text" class="form-control bg-green input-Filters" placeholder="Appareils"/>
+							<div class="input-btn bg-green btn-Filters">
+								<img src="assets/icons/chevron.svg" alt="chevron bas">
+							</div>
+						</div>
+
+						<!-- Menu Ustensiles -->
+						<div class="input-group input-Width">
+							<input type="text" class="form-control bg-red input-Filters" placeholder="Ustensiles"/>
+								<div class="input-btn bg-red btn-Filters">
+									<img src="assets/icons/chevron.svg" alt="chevron bas">
+								</div>
+						</div>
+						
+					</div>
+				</form>
+			</div>
+			
+			<!-- Liste des recettes -->
+			<div class="container mt-3">
+				<div class="row justify-content-between">
+
+					<div class="card mb-4 px-0 card-Width">
+						<img class="card-img-top" src="assets/icons/img.svg" alt="Card image cap" />
+						<div class="card-body bg-grey-light card-Height">
+							<div class="d-flex justify-content-between card-Receipt-header">
+								<p class="font-Lato18">Limonade de coco</p>
+								<div>
+									<img src="assets/icons/clock.svg" alt="Temps de preparation">
+									<small class="font-Lato18 Bold">9 mins</small>
+								</div>
+							</div>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="card-Receipt-ingredients font-Lato12">
+									Lait de coco: 400ml<br>
+									Jus de citron: 2<br>
+									Crème de coco: 2 cuillères à soupe<br>
+									Sucre: 30 grammes<br>
+									Glaçons
+								</div>
+								<div class="card-Receipt-description font-Lato12">
+									Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card mb-4 px-0 card-Width">
+						<img class="card-img-top" src="assets/icons/img.svg" alt="Card image cap" />
+						<div class="card-body bg-grey-light card-Height">
+							<div class="d-flex justify-content-between card-Receipt-header">
+								<p class="font-Lato18">Limonade de coco</p>
+								<div>
+									<img src="assets/icons/clock.svg" alt="Temps de preparation">
+									<small class="font-Lato18 Bold">9 mins</small>
+								</div>
+							</div>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="card-Receipt-ingredients font-Lato12">
+									Lait de coco: 400ml<br>
+									Jus de citron: 2<br>
+									Crème de coco: 2 cuillères à soupe<br>
+									Sucre: 30 grammes<br>
+									Glaçons
+								</div>
+								<div class="card-Receipt-description font-Lato12">
+									Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card mb-4 px-0 card-Width">
+						<img class="card-img-top" src="assets/icons/img.svg" alt="Card image cap" />
+						<div class="card-body bg-grey-light card-Height">
+							<div class="d-flex justify-content-between card-Receipt-header">
+								<p class="font-Lato18">Limonade de coco</p>
+								<div>
+									<img src="assets/icons/clock.svg" alt="Temps de preparation">
+									<small class="font-Lato18 Bold">9 mins</small>
+								</div>
+							</div>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="card-Receipt-ingredients font-Lato12">
+									Lait de coco: 400ml<br>
+									Jus de citron: 2<br>
+									Crème de coco: 2 cuillères à soupe<br>
+									Sucre: 30 grammes<br>
+									Glaçons
+								</div>
+								<div class="card-Receipt-description font-Lato12">
+									Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			
+		</main>
+
+		<footer class="text-muted">
+			<div class="container">
+				<p class="float-right">
+					<a href="#">Back to top</a>
+				</p>
+				<p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+				<p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+			</div>
+		</footer>
+
+		<!-- Bootstrap CDN bundle via jsDelivr includes popper.js -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
