@@ -14,16 +14,18 @@
 		/>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 
-		<link rel="icon" type="image/svg" href="assets/icons/favicon.svg" />
+<!--		<link rel="icon" type="image/svg" href="assets/icons/favicon.svg" /> -->
 		<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
 		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
 		<script src="https://kit.fontawesome.com/fe6a60c3cf.js" crossorigin="anonymous"></script>
 
 		<title>Les Petits Plats</title>
 	</head>
 	<body>
 		<header>
-			<div class="container mt-4">
+			<!-- <div class="container mt-4"> -->
+			<div class="container-fluid p-3 pb-2"></div>
 
 				<!-- Logo Les petits plats -->
 				<div class="d-flex flex-column align-items-center">
@@ -32,14 +34,12 @@
 				</div>
 
 			</div>
-
-			</div>
 		</header>
 
 		<main role="main">
 
 			<!-- Recherche de recettes avec filtres ingrédients, Appareils et ustenseiles -->
-			<div class="container mt-3 p-0">
+			<div class="container-Recipes">
 
 				<form>
 					<!-- Barre de recherche -->
@@ -56,7 +56,7 @@
 					<div class="row mt-3 p-0">
 
 						<!-- Menu Ingredients -->
-						<div class="input-group input-Width">
+						<div class="input-group input-Format">
 								<input type="text" class="form-control bg-blue input-Filters font-Lato18" placeholder="Ingredients"/>
 								<div class="input-btn bg-blue btn-Filters">
 									<img src="assets/icons/chevron.svg" alt="chevron bas">
@@ -64,7 +64,7 @@
 						</div>
 
 						<!-- Menu Appareils -->
-						<div class="input-group input-Width">
+						<div class="input-group input-Format">
 							<input type="text" class="form-control bg-green input-Filters" placeholder="Appareils"/>
 							<div class="input-btn bg-green btn-Filters">
 								<img src="assets/icons/chevron.svg" alt="chevron bas">
@@ -72,7 +72,7 @@
 						</div>
 
 						<!-- Menu Ustensiles -->
-						<div class="input-group input-Width">
+						<div class="input-group input-Format">
 							<input type="text" class="form-control bg-red input-Filters" placeholder="Ustensiles"/>
 								<div class="input-btn bg-red btn-Filters">
 									<img src="assets/icons/chevron.svg" alt="chevron bas">
@@ -81,90 +81,11 @@
 						
 					</div>
 				</form>
-			</div>
 			
 			<!-- Liste des recettes -->
-			<div class="container mt-3">
-				<div class="row justify-content-between">
+			<div id="recipes-display-section" class="row row-Recipes m-0 mt-3"></div>
 
-					<div class="card mb-4 px-0 card-Width">
-						<img class="card-img-top" src="assets/icons/img.svg" alt="Card image cap" />
-						<div class="card-body bg-grey-light card-Height">
-							<div class="d-flex justify-content-between card-Receipt-header">
-								<p class="font-Lato18">Limonade de coco</p>
-								<div>
-									<img src="assets/icons/clock.svg" alt="Temps de preparation">
-									<small class="font-Lato18 Bold">9 mins</small>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="card-Receipt-ingredients font-Lato12">
-									Lait de coco: 400ml<br>
-									Jus de citron: 2<br>
-									Crème de coco: 2 cuillères à soupe<br>
-									Sucre: 30 grammes<br>
-									Glaçons
-								</div>
-								<div class="card-Receipt-description font-Lato12">
-									Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="card mb-4 px-0 card-Width">
-						<img class="card-img-top" src="assets/icons/img.svg" alt="Card image cap" />
-						<div class="card-body bg-grey-light card-Height">
-							<div class="d-flex justify-content-between card-Receipt-header">
-								<p class="font-Lato18">Limonade de coco</p>
-								<div>
-									<img src="assets/icons/clock.svg" alt="Temps de preparation">
-									<small class="font-Lato18 Bold">9 mins</small>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="card-Receipt-ingredients font-Lato12">
-									Lait de coco: 400ml<br>
-									Jus de citron: 2<br>
-									Crème de coco: 2 cuillères à soupe<br>
-									Sucre: 30 grammes<br>
-									Glaçons
-								</div>
-								<div class="card-Receipt-description font-Lato12">
-									Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="card mb-4 px-0 card-Width">
-						<img class="card-img-top" src="assets/icons/img.svg" alt="Card image cap" />
-						<div class="card-body bg-grey-light card-Height">
-							<div class="d-flex justify-content-between card-Receipt-header">
-								<p class="font-Lato18">Limonade de coco</p>
-								<div>
-									<img src="assets/icons/clock.svg" alt="Temps de preparation">
-									<small class="font-Lato18 Bold">9 mins</small>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="card-Receipt-ingredients font-Lato12">
-									Lait de coco: 400ml<br>
-									Jus de citron: 2<br>
-									Crème de coco: 2 cuillères à soupe<br>
-									Sucre: 30 grammes<br>
-									Glaçons
-								</div>
-								<div class="card-Receipt-description font-Lato12">
-									Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-			
+		</div>
 		</main>
 
 		<footer class="text-muted">
@@ -172,8 +93,6 @@
 				<p class="float-right">
 					<a href="#">Back to top</a>
 				</p>
-				<p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-				<p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
 			</div>
 		</footer>
 
@@ -183,5 +102,9 @@
 			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 			crossorigin="anonymous"
 		></script>
+
+		<script src="scripts/utils/APIfetch.js" type="module"></script>
+		<script src="scripts/pages/index.js" type="module"></script>
+
 	</body>
 </html>

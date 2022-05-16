@@ -1,164 +1,161 @@
-/* Importé de BOOTSTRAP STYLE */
-
-:root {
-  --jumbotron-padding-y: 3rem;
-}
-
-.jumbotron {
-  padding-top: var(--jumbotron-padding-y);
-  padding-bottom: var(--jumbotron-padding-y);
-  margin-bottom: 0;
-  background-color: #fff;
-}
-@media (min-width: 768px) {
-  .jumbotron {
-    padding-top: calc(var(--jumbotron-padding-y) * 2);
-    padding-bottom: calc(var(--jumbotron-padding-y) * 2);
-  }
-}
-
-.jumbotron p:last-child {
-  margin-bottom: 0;
-}
-
-.jumbotron-heading {
-  font-weight: 300;
-}
-
-.jumbotron .container {
-  max-width: 40rem;
-}
-
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
 }
 
 footer p {
-  margin-bottom: .25rem;
+	margin-bottom: 0.25rem;
 }
 
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
-
-/* Styles liés à la page index.html */
+.box-shadow {
+	box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
 
 .bg-blue {
-  background: #3282F7!important;
+	background: #3282f7 !important;
 }
 
 .bg-green {
-  background: #68D9A4!important;
+	background: #68d9a4 !important;
 }
 
 .bg-red {
-  background: #ED6454!important;
+	background: #ed6454 !important;
 }
 
 .bg-grey-light {
-  background: #E7E7E7!important;
+	background: #e7e7e7 !important;
 }
 
-.form-Max-width {
-  max-width: 1240px;
+.form-Maxwidth {
+	width: 1240px;
 }
 
 .card-Width {
-  width: 380px!important;
+	min-width: 360px !important;
+	max-width: 400px !important;
 }
 
 .card-Height {
-  min-height: 186px;
+	height: 186px;
+	max-height: 186px;
 }
 
 .font-Lato18 {
-  font-family: Lato;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  color: #000000;
+	font-family: Lato, sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	color: #000000;
 }
 
 .font-Lato12 {
-font-family: 'Lato';
-font-style: normal;
-font-weight: 700;
-font-size: 12px;
-line-height: 14px;
-color: #000000;
+	font-family: "Lato", sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 14px;
+	color: #000000;
+}
+
+.font-Roboto12 {
+	font-family: "Roboto", sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 14px;
+	color: #000000;
 }
 
 .Bold {
-  font-weight: 700;
+	font-weight: 700;
 }
 
 .header-titre {
-  color: #D04F4F;
-  font-size: 36px;
-  font-weight: 700;
-  font-style: normal;
-  line-height: 47px;
+	color: #d04f4f;
+	font-size: 36px;
+	font-weight: 700;
+	font-style: normal;
+	line-height: 47px;
 }
 
 .header-logo {
-  width: 50px;
-}
-
-.positionRel {
-  position: relative;
+	width: 50px;
 }
 
 .input-Search {
-  border: none;
-  border-radius: 5px 5px 5px 5px!important;
-  background-color: #E7E7E7!important;
-  height: 69px;
+	border: none;
+	border-radius: 5px 5px 5px 5px !important;
+	background-color: #e7e7e7 !important;
+	height: 69px;
 }
 
 .input-Search::placeholder {
-  font-family: Lato;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
+	font-family: Lato;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
 }
 
 .btn-Search {
-  position: absolute;
-  right: 2rem;
-  top: 1rem;
-  z-index: 5;
-  cursor: pointer;
-  border: none;
-  background: #E7E7E7;
-  height: 40px;
+	position: absolute;
+	right: 2rem;
+	top: 1rem;
+	z-index: 5;
+	cursor: pointer;
+	border: none;
+	background: #e7e7e7;
+	height: 40px;
 }
 
 .input-Filters {
-  border: none;
-  border-radius: 5px 5px 5px 5px!important;
-  color: #ffffff;
-  height: 69px;
+	border: none;
+	border-radius: 5px 5px 5px 5px !important;
+	color: #ffffff;
+	height: 69px;
 }
 
 .input-Filters::placeholder {
-  color: #ffffff;
-  font-weight: 700;
+	color: #ffffff;
+	font-weight: 700;
 }
 
 .btn-Filters {
-  position: absolute;
-  right: 1.5rem;
-  top: 1.3rem;
-  z-index: 5;
-  border: none;
-  color: #ffffff;
-  height: 40px;
+	position: absolute;
+	right: 1.5rem;
+	top: 1.3rem;
+	z-index: 5;
+	border: none;
+	color: #ffffff;
+	height: 40px;
 }
 
-.input-Width {
-  width: 170px;
+.input-Format {
+	width: 170px;
+	padding: 12px;
 }
 
-.card-Receipt-ingredients,
- .card-Receipt-description {
-   width: 50%;
- }
+.container-Recipes {
+	width: 95%;
+	margin: auto;
+}
+.card-Recipe-ingredients,
+.card-Recipe-description {
+	display: inline-block;
+	width: 171px;
+	height: 109px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.row-Recipes {
+	justify-content: space-between;
+}
+
+/* Responsive */
+@media (max-width: 1300px) {
+	/* Au passage sur deux colonnes, recentrer les cards des recettes */
+	.row-Recipes {
+		justify-content: space-around;
+	}
+}
