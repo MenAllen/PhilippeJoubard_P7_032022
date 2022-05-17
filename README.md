@@ -7,5 +7,16 @@ La page github: https://menallen.github.io/PhilippeJoubard_P7_032022/index.html
 ## Démarrer le projet
 Rien à installer ici, il suffit d'ouvrir le fichier `index.html`
 
-## LivraisonsHistorique
+## Inputs
+Maquettes FIGMA
+Tableau JSON de 50 recettes avec pour chacune ingrédients, équipements, ustensiles et description
+Fiche de description du cas d'utilisation de la recherche
+Exemple de fiche d'investigation de fonctionnalité
+
+# Outputs
+Fiche d'investigation de fonctionnalité -> Algorigramme
+Application incluant deux options de réalisation -> 2 branches
+Comparaison des deux solutions avec l'outil JSben.ch
+
+## Livraisons
 Livraison initiale : template page d'accueil avec lecture json et visualisation des recettes

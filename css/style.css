@@ -32,8 +32,7 @@ footer p {
 }
 
 .card-Width {
-	min-width: 360px !important;
-	max-width: 400px !important;
+	width: 380px !important;
 }
 
 .card-Height {
@@ -123,7 +122,7 @@ footer p {
 .btn-Filters {
 	position: absolute;
 	right: 1.5rem;
-	top: 1.3rem;
+	top: 2rem;
 	z-index: 5;
 	border: none;
 	color: #ffffff;
@@ -139,13 +138,26 @@ footer p {
 	width: 95%;
 	margin: auto;
 }
-.card-Recipe-ingredients,
+
+.card-Recipe-name {
+  width: 230px;
+  margin-bottom: 0!important;
+}
+
+.card-Recipe-ingredients {
+  width: 171px;
+	height: 111px;
+  display: block;
+}
+
 .card-Recipe-description {
-	display: inline-block;
-	width: 171px;
-	height: 109px;
+  width: 171px;
+	height: 111px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;  
 }
 
 .row-Recipes {

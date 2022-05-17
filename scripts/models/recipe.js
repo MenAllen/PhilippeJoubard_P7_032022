@@ -34,7 +34,9 @@ export class Recipe {
 		listeIngredients = this._ingredients
 			.map((element) => {
 				return `			
-			<strong>${element.ingredient}:</strong><br>`;
+			<strong>${element.ingredient}:</strong>
+			${ "quantity" in element ? element.quantity : ""}
+			${ "unit" in element ? element.unit : "" }<br>`;
 			})
 			.join("");
 
@@ -53,13 +55,13 @@ export class Recipe {
 			 		<img class="card-img-top" src="assets/icons/img.svg" alt="Card image cap" />
 			 		<div class="card-body bg-grey-light card-Height">
 				 		<div class="d-flex justify-content-between">
-					 		<p class="font-Lato18">${this._name}</p>
+					 		<p class="card-Recipe-name font-Lato18">${this._name}</p>
 					 		<div>
 						 		<img src="assets/icons/clock.svg" alt="Temps de preparation">
 						 		<small class="font-Lato18 Bold">${this._time} mins</small>
 					 		</div>
 				 		</div>
-				 		<div class="d-flex justify-content-between align-items-center">
+				 		<div class="d-flex mt-2 justify-content-between align-items-center">
 					 		<p class="card-Recipe-ingredients font-Lato12">${this.ingredients}</p>
 					 		<p class="card-Recipe-description font-Roboto12">${this._description}</p>
 				 		</div>
