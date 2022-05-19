@@ -31,6 +31,10 @@ footer p {
 	width: 1240px;
 }
 
+.form-control:focus {
+  color: grey;
+}
+
 .card-Width {
 	width: 380px !important;
 }
@@ -42,6 +46,7 @@ footer p {
 
 .font-Lato18 {
 	font-family: Lato, sans-serif;
+  font-style:normal;
 	font-weight: 400;
 	font-size: 18px;
 	line-height: 22px;
@@ -80,6 +85,12 @@ footer p {
 
 .header-logo {
 	width: 50px;
+}
+
+#btnIngredients:hover,
+ #btnAppliances:hover,
+  #btnUstensils:hover {
+  cursor: pointer;
 }
 
 .input-Search {
@@ -126,12 +137,54 @@ footer p {
 	z-index: 5;
 	border: none;
 	color: #ffffff;
-	height: 40px;
+	height: 20px;
 }
 
 .input-Format {
+  position: relative;
 	width: 170px;
 	padding: 12px;
+}
+
+.ingredients-extendedwidth {
+  width: 760px;
+}
+
+.appliances-extendedwidth {
+  width: 626px;
+}
+
+.ustensils-extendedwidth {
+  width: 738px;
+}
+
+.ingredients-list-item,
+ .appliances-list-item,
+  .ustensils-list-item {
+  cursor: pointer;
+}
+
+#listIngredients,
+ #listAppliances,
+  #listUstensils {
+  display: none;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: 1fr;
+  align-items: center; 
+  gap: 0.5rem 5rem;
+  position: absolute;
+  top: 75%;
+  left: 2%;
+/*  max-width: 666px; */
+  max-width: 734px;
+  z-index: 10;
+}
+
+.items-display,
+.ingredients-display,
+ .appliances-display,
+  .ustensils-display {
+  display: grid!important;
 }
 
 .container-Recipes {

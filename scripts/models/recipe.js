@@ -53,7 +53,7 @@ export class Recipe {
 		return `
 			 	<div class="card mb-4 px-0 card-Width">
 			 		<img class="card-img-top" src="assets/icons/img.svg" alt="Card image cap" />
-			 		<div class="card-body bg-grey-light card-Height">
+			 		<div class="card-body px-2 bg-grey-light card-Height">
 				 		<div class="d-flex justify-content-between">
 					 		<p class="card-Recipe-name font-Lato18">${this._name}</p>
 					 		<div>
