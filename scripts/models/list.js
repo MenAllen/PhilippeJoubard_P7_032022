@@ -1,5 +1,7 @@
 // Déclaration 
-import { itemsSelected } from "../pages/index.js";
+import { selectedTags } from "../pages/index.js";
+import { closeAllLists } from "../pages/index.js";
+import { clearString } from "../utils/string.js";
 
 /**
  * Classe Liste
@@ -11,26 +13,31 @@ import { itemsSelected } from "../pages/index.js";
 
  export class List {
 
-	constructor(data, menuId, listId, btnId, itemClass, widthClass) {
+	constructor(data, dataType, menuId, listId, btnId, itemClass, widthClass) {
 		this._elements = data;
+    this._dataType = dataType;
     this._menuId = menuId;
     this._listId = listId;
     this._btnId = btnId;
     this._itemClass = itemClass;
     this._widthClass = widthClass;
 		this._actives = data.map((i) => true);
-	}
+
+    // Nettoyage de la liste des ingredients: accents et fautes d'orthographe
+    this._elements = clearString(this._elements);
+
+  }
 
   // Affichage de la liste des éléments ingrédients, appliances ou ustensiles
   displayListDOM() {
 
-    let expression = "";
+    let itemsListString = "";
 
     for (let i=0; i < this._elements.length; i++) {
-      expression += `<i class="${this._itemClass} font-Lato18 text-white">${this._elements[i]}</i>`;
+      itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${this._elements[i]}" data-type="${this._dataType}">${this._elements[i]}</i>`;
     }
 
-    return (expression);
+    return (itemsListString);
   }
 
   // Activation des listeners sur les boutons de chaque liste
@@ -45,10 +52,11 @@ import { itemsSelected } from "../pages/index.js";
       if (elementUl.classList.contains("items-display")) {
         elementMenu.classList.remove(this._widthClass);
         elementBtn.childNodes[1].style.transform = "rotate(0deg)";
-        elementUl.classList.remove(displayClass);
+        elementUl.classList.remove("items-display");
         return;
       }
       /*clearLists();*/
+      closeAllLists();
       elementMenu.classList.add(this._widthClass);
       elementBtn.childNodes[1].style.transform = "rotate(180deg)";
       elementUl.classList.add("items-display");
@@ -64,12 +72,13 @@ import { itemsSelected } from "../pages/index.js";
     const listItems = document.querySelectorAll(`.${this._itemClass}`);
     listItems.forEach((item) => {
       item.addEventListener("click", (e) => {
-        console.log(item.outerText);
+        selectedTags.addTag(item.dataset.name, item.dataset.type);
+        this.closeList();
        })
     });
   }
 
-  // Close list
+  // Close list: display à none, largeur bouton mini, chevron vers le bas
   closeList() {
 
 		document.getElementById(this._listId).classList.remove("items-display");

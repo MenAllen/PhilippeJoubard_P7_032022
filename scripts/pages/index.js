@@ -2,77 +2,41 @@
 import { getRecipes } from "../utils/APIfetch.js";
 import { Recipe } from "../models/recipe.js";
 import { List } from "../models/list.js";
+import { TagsArray } from "../models/tags.js";
 
-// Décalartion de variables globales
-export const itemsSelected = [];
+// Listes des ingredients, appareils et ustensiles
+let ingredientsList;
+let appliancesList;
+let ustensilsList;
 
-function clearLists() {
-
-	console.log("clearLists");
-
-	const tabUl = ["listIngredients", "listAppliances", "listUstensils"];
-	const tabMenu = ["menuIngredients", "menuAppliances","menuUstensils",];
-	const tabBtn = ["btnIngredients", "btnAppliances", "btnUstensils"];
-	
-	tabUl.map( (elt) => {
-		document.getElementById(elt).classList.remove("items-display");
-	});
-	tabMenu.map( (elt) => {
-		document.getElementById(elt).setAttribute("class", "input-group input-Format");	
-	});
-	tabBtn.map( (elt) => {
-		document.getElementById(elt).childNodes[1].style.transform = "rotate(0deg)";
-	});
-}
+export let selectedTags;
 
 /**
- * Activation des boutons dropdown
- * 
- * @param {*} list	la liste des ingredients, des appliances ou des ustensiles
- * @param {*} btnClass 
- * @param {*} ulClass 
- * @param {*} displayClass 
- * @param {*} itemClass 
+ * Fermeture des menus dropdown, appelée avant l'ouverture
  */
-function activateListeners(list, menuId, btnId, ulId, displayClass, itemClass, widthClass) {
-
-	const elementMenu = document.getElementById(menuId);
-	const elementBtn = document.getElementById(btnId);
-	const elementUl = document.getElementById(ulId);
-
-	elementBtn.addEventListener("click", (e) => {
-		e.preventDefault();
-		if (elementUl.classList.contains(displayClass)) {
-			elementMenu.classList.remove(widthClass);
-			elementBtn.childNodes[1].style.transform = "rotate(0deg)";
-			elementUl.classList.remove(displayClass);
-			return;
-		}
-		clearLists();
-		elementMenu.classList.add(widthClass);
-		elementBtn.childNodes[1].style.transform = "rotate(180deg)";
-		elementUl.classList.add(displayClass);
-		elementUl.innerHTML = list.displayListDOM();
-		list.activateListItems();
-	});
-
-
+export function closeAllLists() {
+	ingredientsList.closeList();
+	appliancesList.closeList();
+	ustensilsList.closeList();
 }
+
+
 /**
  * Créer les listeners des 3 boutons ingredients, appliances et ustensiles
+ * pour afficher les listes au click
  *
  * @param {*} les listes associées aux boutons
  */
 function displayLists(ingList, appList, ustList) {
 
 	// Ingredients
-	activateListeners(ingList, "menuIngredients","btnIngredients", "listIngredients", "items-display", "ingredients-list-item", "ingredients-extendedwidth");
+	ingList.activateList();
 
-	// Appliances 
-	activateListeners(appList, "menuAppliances", "btnAppliances", "listAppliances", "items-display", "appliances-list-item", "appliances-extendedwidth")
+	// Appliances
+	appList.activateList(); 
 
-	// Ustensiles 
-	activateListeners(ustList, "menuUstensils", "btnUstensils", "listUstensils", "items-display", "ustensils-list-item", "ustensils-extendedwidth")
+	// Ustensiles
+	ustList.activateList(); 
 
 }
 
@@ -93,9 +57,9 @@ function createResources(recipes) {
 		tabUstensils = [...new Set([...tabUstensils, ...recipe.ustensils.map((elt) => elt.toLowerCase())])].sort();
 	});
 
-	let ingredientsModel = new List(tabIngredients, "menuIngredients", "listIngredients", "btnIngredients", "ingredients-list-item", "ingredients-extendedwidth");
-	let appliancesModel = new List(tabAppliances, "menuAppliances", "listAppliances", "btnAppliances", "appliances-list-item", "appliances-extendedwidth");
-	let ustensilsModel = new List(tabUstensils, "menuUstensils", "listUstensils", "btnUstensils", "ustensils-list-item", "ustensils-extendedwidth");
+	let ingredientsModel = new List(tabIngredients, "$ingredients", "menuIngredients", "listIngredients", "btnIngredients", "ingredients-list-item", "ingredients-extendedwidth");
+	let appliancesModel = new List(tabAppliances, "$appliances", "menuAppliances", "listAppliances", "btnAppliances", "appliances-list-item", "appliances-extendedwidth");
+	let ustensilsModel = new List(tabUstensils, "$ustensils", "menuUstensils", "listUstensils", "btnUstensils", "ustensils-list-item", "ustensils-extendedwidth");
 
 	return [ingredientsModel, appliancesModel, ustensilsModel];
 }
@@ -119,13 +83,18 @@ async function displayRecipes(recipes) {
  * Initialisation de la page d'accueil
  */
 async function init() {
+
 	/* Extraire les recettes du JSON et les afficher */
 	const { recipes } = await getRecipes();
 	displayRecipes(recipes);
 
 	/* Extraire les listes d'ingrédients, d'appareils et d'ustensiles des recettes, et active les écouteurs */
-	const [ingredientsList, appliancesList, ustensilsList] = createResources(recipes);
+	[ingredientsList, appliancesList, ustensilsList] = createResources(recipes);
 	displayLists(ingredientsList, appliancesList, ustensilsList);
+
+	/* Initialiser la table des tags */
+	selectedTags = new TagsArray();
+
 }
 
 init();

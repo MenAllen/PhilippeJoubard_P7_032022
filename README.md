@@ -21,3 +21,4 @@ Comparaison des deux solutions avec l'outil JSben.ch
 ## Livraisons
  - Livraison initiale : template page d'accueil avec lecture json et visualisation des recettes
  - Livraison 2 : affichage des listes ingredients, appareils et ustensiles
+ - Livraison 3 : Ajout et suppression des Tags

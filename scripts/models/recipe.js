@@ -39,7 +39,7 @@ export class Recipe {
 			${ "unit" in element ? element.unit : "" }<br>`;
 			})
 			.join("");
-
+		
 		return listeIngredients;
 	}
 

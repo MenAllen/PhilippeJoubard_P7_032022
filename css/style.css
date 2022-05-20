@@ -89,13 +89,14 @@ footer p {
 
 #btnIngredients:hover,
  #btnAppliances:hover,
-  #btnUstensils:hover {
+  #btnUstensils:hover,
+   #closetag:hover {
   cursor: pointer;
 }
 
 .input-Search {
 	border: none;
-	border-radius: 5px 5px 5px 5px !important;
+	border-radius: 5px!important;
 	background-color: #e7e7e7 !important;
 	height: 69px;
 }
@@ -120,7 +121,7 @@ footer p {
 
 .input-Filters {
 	border: none;
-	border-radius: 5px 5px 5px 5px !important;
+	border-radius: 5px!important;
 	color: #ffffff;
 	height: 69px;
 }
@@ -180,10 +181,7 @@ footer p {
   z-index: 10;
 }
 
-.items-display,
-.ingredients-display,
- .appliances-display,
-  .ustensils-display {
+.items-display {
   display: grid!important;
 }
 
@@ -215,6 +213,15 @@ footer p {
 
 .row-Recipes {
 	justify-content: space-between;
+}
+
+.blockTags-item {
+  height: 37px;
+  border: none;
+	border-radius: 5px;
+  color: white;
+  padding: 0 0.5rem;
+  margin-right: 1rem;
 }
 
 /* Responsive */
