@@ -21,28 +21,53 @@ function strNoAccent(a) {
  * @returns tableau traité : corrections doublons, fautes, suppression accents
  */
 export function clearString(stringArray) {
+	// Variables de travail
+	let workingArray = [];
+	let uniqueworkingArray = [];
+	let str = "";
 
-  // Variables de travail
-  let workingArray = [];
-  let uniqueworkingArray = [];
-  let str = "";
+	// Déclarer le Tableau des exceptions et le tableau des corrections
+	let tabExceptions = ["Bananes", "Huile d'olives", "Kiwis", "Pommes"];
+	const tabCorrections = [
+		["casserolle", "casserole"],
+		["Crème Fraiche", "Crème fraîche"],
+		["Crème fraiche", "Crème fraîche"],
+		["Crème Fraîche", "Crème fraîche"],
+    ["Crême Fraîche", "Crème fraîche"],
+    ["cuillère en bois", "Cuillère en bois"],
+    ["cuillère à Soupe", "Cuillère à Soupe"],
+		["couteau", "Couteau"],
+		["économe", "Économe"],
+		["poelle à frire", "Poelle à frire"],
+		["Lait de Coco", "Lait de coco"],
+		["Sucre en Poudre", "Sucre en poudre"],
+		["farine", "Farine"],
+		["huile d'olive", "Huile d'olive"],
+		["huile d'olives", "Huile d'olive"],
+		["gruyère râpé", "Gruyère râpé"]
+	];
 
-  // Tableu des exceptions à traiter: les éléments qui gardent un "s" et les éléments à remplacer
-  let tabExceptions = ["bananes", "huile d'olives", "kiwis", "pommes"];
-  let tabCorrections = [["casserolle", "casserole"]]
-
+	// Enlever les "s" pour éviter les doublons
 	for (let i = 0; i < stringArray.length; i++) {
-    workingArray[i] = strNoAccent(stringArray[i]);
-    if (workingArray[i].endsWith("s")) {
-      if (tabExceptions.indexOf(workingArray[i]) != -1) {
-        str = workingArray[i].slice(0, -1);
-        workingArray[i] = str;
-      }
-    } else if (workingArray[i] === tabCorrections[0][0]) {
-      workingArray[i] = tabCorrections[0][1]
-    }
-  }
-	//  workingArray = stringArray.map((elt) => { elt = strNoAccent(elt) });
-  uniqueworkingArray = [...new Set(workingArray)];
+		workingArray[i] = stringArray[i];
+		if (workingArray[i].endsWith("s")) {
+			if (tabExceptions.indexOf(workingArray[i]) != -1) {
+				str = workingArray[i].slice(0, -1);
+				workingArray[i] = str;
+			}
+		}
+	}
+
+	// Corriger certains cas où des fautes d'orthographe génèrent des doublons
+	for (let i = 0; i < workingArray.length; i++) {
+		for (let j = 0; j < tabCorrections.length; j++) {
+			if (workingArray[i] === tabCorrections[j][0]) {
+				workingArray[i] = tabCorrections[j][1];
+			}
+		}
+	}
+
+	// Supprimer les doublons et retourner le tableau
+	uniqueworkingArray = [...new Set(workingArray.sort())];
 	return uniqueworkingArray;
 }

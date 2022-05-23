@@ -52,9 +52,10 @@ function createResources(recipes) {
 	let tabUstensils = [];
 
 	recipes.forEach((recipe) => {
-		tabIngredients = [...new Set([...tabIngredients, ...recipe.ingredients.map((elt) => elt.ingredient.toLowerCase())])].sort();
-		tabAppliances = [...new Set([...tabAppliances, ...[recipe.appliance.toLowerCase().replace(".","")]])].sort();
-		tabUstensils = [...new Set([...tabUstensils, ...recipe.ustensils.map((elt) => elt.toLowerCase())])].sort();
+//		tabIngredients = [...new Set([...tabIngredients, ...recipe.ingredients.map((elt) => elt.ingredient.toLowerCase())])].sort();
+		tabIngredients = [...new Set([...tabIngredients, ...recipe.ingredients.map((elt) => elt.ingredient)])].sort();
+		tabAppliances = [...new Set([...tabAppliances, ...[recipe.appliance.replace(".","")]])].sort();
+		tabUstensils = [...new Set([...tabUstensils, ...recipe.ustensils])].sort();
 	});
 
 	let ingredientsModel = new List(tabIngredients, "$ingredients", "menuIngredients", "listIngredients", "btnIngredients", "ingredients-list-item", "ingredients-extendedwidth");

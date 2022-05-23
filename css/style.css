@@ -27,6 +27,10 @@ footer p {
 	background: #e7e7e7 !important;
 }
 
+.c-white {
+  color: white!important;
+}
+
 .form-Maxwidth {
 	width: 1240px;
 }
