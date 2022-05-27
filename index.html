@@ -16,9 +16,9 @@
 
 		<link rel="icon" type="image/svg" href="assets/icons/favicon.svg" />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Lato:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
 		<script src="https://kit.fontawesome.com/fe6a60c3cf.js" crossorigin="anonymous"></script>
 
@@ -26,80 +26,80 @@
 	</head>
 	<body>
 		<header>
-
 			<div class="container-fluid p-3 pb-2">
-
 				<!-- Logo Les petits plats -->
 				<div class="d-flex flex-column align-items-center">
 					<img src="assets/icons/vector.svg" class="header-logo" alt="logo les petits plats" />
 					<h1 class="header-titre">Les petits plats</h1>
 				</div>
-
 			</div>
 		</header>
 
 		<main>
-
 			<!-- Recherche de recettes avec filtres ingrédients, Appareils et ustenseiles -->
-			<div class="container-Recipes">
-
+			<div id="top"  class="container-Recipes">
 				<form>
 					<!-- Barre de recherche -->
 					<div class="input-group">
-						<input type="text" class="form-control bg-secondary input-Search font-Lato18" placeholder="Rechercher une recette" />
+						<label for="menuPrincipal"></label>
+						<input id="menuPrincipal" type="search" class="form-control bg-secondary input-Search font-Lato18" placeholder="Rechercher une recette" />
 						<div class="input-btn btn-Search">
 							<i class="fa fa-search fa-2x"></i>
 						</div>
 					</div>
-			
+
 					<!-- Tags sélectionnés -->
 					<div id="blockTags" class="row rounded col-auto mt-3">
 						<ul id="listTags" class="d-flex flex-row flex-wrap mb-0 mr-1"></ul>
 					</div>
 
 					<!-- Dropdown menus -->
-					<div class="row mt-3 p-0">
 
-						<!-- Menu Ingredients -->
+					<div class="row mt-3 p-0"> 
+					
+						<!-- Menu Ingredients --> 
 						<div id="menuIngredients" class="input-group input-Format">
-								<input type="text" class="form-control bg-blue input-Filters font-Lato18 Bold c-white" placeholder="Ingredients"/>
-								<ul id="listIngredients" class="bg-blue py-3"></ul>
+								<label for="ingrédient"></label>
+								<input type="search" class="form-control bg-blue input-Filters font-Lato18 Bold c-white" id="ingrédient" placeholder="Ingredients" />
+								<ul id="listIngredients" class="bg-blue px-2 py-3"></ul>
 								<div id="btnIngredients" class="input-btn bg-blue btn-Filters">
-									<img src="assets/icons/chevron.svg" alt="chevron bas">
+									<img src="assets/icons/chevron.svg" class="chevronIngredients" alt="chevron bas" />
 								</div>
 						</div>
 
 						<!-- Menu Appareils -->
-						<div id = "menuAppliances" class="input-group input-Format">
-							<input type="text" class="form-control bg-green input-Filters font-Lato18 Bold c-white" placeholder="Appareils"/>
-							<ul id="listAppliances" class="bg-green py-3"></ul>
+						<div id="menuAppliances" class="input-group input-Format">
+							<label for="appareil"></label>
+							<input type="search" class="form-control bg-green input-Filters font-Lato18 Bold c-white" id="appareil" placeholder="Appareils" />
+							<ul id="listAppliances" class="bg-green px-2 py-3"></ul>
 							<div id="btnAppliances" class="input-btn bg-green btn-Filters">
-								<img src="assets/icons/chevron.svg" alt="chevron bas">
+								<img src="assets/icons/chevron.svg" class="chevronAppliances" alt="chevron bas" />
 							</div>
 						</div>
 
-						<!-- Menu Ustensiles -->
-						<div id = "menuUstensils"class="input-group input-Format">
-							<input type="text" class="form-control bg-red input-Filters font-Lato18 Bold c-white" placeholder="Ustensiles"/>
-							<ul id="listUstensils" class="bg-red py-3"></ul>
+						<!--Menu Ustensiles -->
+						<div id="menuUstensils" class="input-group input-Format">
+							<label for="utensile"></label>
+							<input type="search" class="form-control bg-red input-Filters font-Lato18 Bold c-white" id="utensile" placeholder="Ustensiles" />
+							<ul id="listUstensils" class="bg-red px-2 py-3"></ul>
 							<div id="btnUstensils" class="input-btn bg-red btn-Filters">
-									<img src="assets/icons/chevron.svg" alt="chevron bas">
-								</div>
-						</div>
-						
+								<img src="assets/icons/chevron.svg" class="chevronUstensils" alt="chevron bas" />
+							</div>
+						</div> 
 					</div>
 				</form>
-			
-			<!-- Liste des recettes -->
-			<div id="recipes-display-section" class="row row-Recipes m-0 mt-3"></div>
 
-		</div>
+				<!-- Liste des recettes -->
+				<div id="recipes-display-section" class="row align-items-center mt-3">
+<!--					<div id="recipes-display-section" class="row p-0"></div> -->
+				</div>
+			</div>
 		</main>
 
 		<footer class="text-muted">
 			<div class="container">
 				<p class="float-right">
-					<a href="#">Back to top</a>
+					<a href="#top">Back to top</a>
 				</p>
 			</div>
 		</footer>
@@ -113,6 +113,5 @@
 
 		<script src="scripts/utils/APIfetch.js" type="module"></script>
 		<script src="scripts/pages/index.js" type="module"></script>
-
 	</body>
 </html>

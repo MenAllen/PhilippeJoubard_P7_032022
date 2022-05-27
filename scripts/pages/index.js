@@ -5,14 +5,19 @@ import { List } from "../models/list.js";
 import { TagsArray } from "../models/tags.js";
 
 // Listes des ingredients, appareils et ustensiles
-let ingredientsList;
-let appliancesList;
-let ustensilsList;
+export let ingredientsList;
+export let appliancesList;
+export let ustensilsList;
 
-export let selectedTags;
+// Variables de travail
+let inputString = "";										// expression d'entrée de la recherche générale
+let allRecipes = [];										// les 50 recettes chargées depuis 
+let filteredRecipes = [];								// les recettes filtrées par l'expression d'entrée
+let tagFilteredRecipes = []							// les recettes filtrées par les tags et l'expression d'entrée
+export let selectedTags;								// les tags sélectionnés
 
 /**
- * Fermeture des menus dropdown, appelée avant l'ouverture
+ * Fermer les 3 menus dropdown
  */
 export function closeAllLists() {
 	ingredientsList.closeList();
@@ -20,28 +25,50 @@ export function closeAllLists() {
 	ustensilsList.closeList();
 }
 
-
 /**
- * Créer les listeners des 3 boutons ingredients, appliances et ustensiles
- * pour afficher les listes au click
+ * Créer les listeners dédiés au click pour la page d'accueil:
+ * 	- les 3 boutons ingredients, appliances et ustensiles
+ * 	- l'icône de recherche de la barre principale
+ *  - tout click sur la page
  *
- * @param {*} les listes associées aux boutons
+ * @param {*} Aucun
  */
-function displayLists(ingList, appList, ustList) {
+function activateLists() {
 
-	// Ingredients
-	ingList.activateList();
-
-	// Appliances
-	appList.activateList(); 
-
-	// Ustensiles
-	ustList.activateList(); 
+	document.body.addEventListener("click", (e) => {
+		e.preventDefault();
+		console.log("click :", e.target);
+		if (e.target.classList.contains("chevronIngredients")) {
+			ingredientsList.activateList();
+		} else if (e.target.classList.contains("chevronAppliances")) {
+			appliancesList.activateList(); 
+		} else if (e.target.classList.contains("chevronUstensils")) {
+			ustensilsList.activateList();	
+		} else if (e.target.classList.contains("fa-search")) {
+			updateRecipes();
+			closeAllLists();
+		} else {
+			console.log(inputString);
+			closeAllLists();
+		}
+		e.stopImmediatePropagation();
+	});
 
 }
 
 /**
- * Créé la liste des ingrédients, des appareils et des ustensiles
+ * Mise à jour des listes à partir d'une liste de recettes
+ * 
+ * @param {*} recipes 
+ */
+function updateLists(recipes) {
+
+	[ingredientsList, appliancesList, ustensilsList] = createResources(recipes);
+	activateLists();
+}
+
+/**
+ * Créer la liste des ingrédients, des appareils et des ustensiles
  * à partir des recettes fournies. Permet d'ignorer les doublons
  *
  * @param {*} recipes la liste des recettes issues du json
@@ -52,7 +79,6 @@ function createResources(recipes) {
 	let tabUstensils = [];
 
 	recipes.forEach((recipe) => {
-//		tabIngredients = [...new Set([...tabIngredients, ...recipe.ingredients.map((elt) => elt.ingredient.toLowerCase())])].sort();
 		tabIngredients = [...new Set([...tabIngredients, ...recipe.ingredients.map((elt) => elt.ingredient)])].sort();
 		tabAppliances = [...new Set([...tabAppliances, ...[recipe.appliance.replace(".","")]])].sort();
 		tabUstensils = [...new Set([...tabUstensils, ...recipe.ustensils])].sort();
@@ -66,7 +92,7 @@ function createResources(recipes) {
 }
 
 /**
- * Affiche toutes les recettes sur la page d'accueil
+ * Afficher toutes les recettes sur la page d'accueil
  *
  * @param {*} recipes la liste des recettes issues du json
  */
@@ -78,6 +104,95 @@ async function displayRecipes(recipes) {
 		const recipeModel = new Recipe(recipe);
 		recipeDisplaySection.innerHTML += recipeModel.recipeCardDOM;
 	});
+
+}
+
+/**
+ * Filtrer la liste des recettes avec les tags sélectionnés
+ * 
+ * @param {} listRecipes 
+ * @returns tagFilteredRecipes updated
+ */
+function tagFilterRecipes(listRecipes) {
+
+	// console.log("tagFilterRecipes", selectedTags._tableT);
+	let len = selectedTags._tableT.length;
+
+	if (len > 0) {
+
+		selectedTags._tableT.forEach((item) => {
+
+			if (item[1] === "$appliances") {
+				listRecipes = listRecipes.filter((recipe) => {
+					return recipe.appliance.toLowerCase().includes(item[0].toLowerCase());
+				})
+			};
+			
+			if (item[1] === "$ustensils") {
+				listRecipes = listRecipes.filter((recipe) => {
+					return recipe.ustensils.find((elt) =>
+						elt.toLowerCase().includes(item[0].toLowerCase()));
+				})
+			}
+
+			if (item[1] === "$ingredients") {
+				listRecipes = listRecipes.filter((recipe) => {
+					return recipe.ingredients.find((elt) =>
+						elt.ingredient.toLowerCase() === item[0].toLowerCase());
+				})
+			}
+
+		});
+
+		tagFilteredRecipes = listRecipes;
+		console.log(tagFilteredRecipes);
+		return;
+	}
+	tagFilteredRecipes = listRecipes;
+	
+}
+
+/**
+ *  Mettre à jour les recettes affichées
+ */
+export function updateRecipes() {
+
+	filteredRecipes = allRecipes;
+
+	console.log(inputString);
+	if (inputString.length >= 3) {
+		filteredRecipes = allRecipes.filter((recipe) => {
+			return (
+				recipe.name.toLowerCase().includes(inputString) || recipe.description.toLowerCase().includes(inputString) || recipe.ingredients.some( (item) => { item.ingredient.toLowerCase().includes(inputString)})					
+			)
+		});
+	}
+	tagFilterRecipes(filteredRecipes);
+	displayRecipes(tagFilteredRecipes);
+	updateLists(tagFilteredRecipes);
+
+	if (tagFilteredRecipes.length === 0) {
+		document.getElementById("recipes-display-section").innerHTML =
+		"<p id='noRecipes'> Aucune recette ne correspond à votre critère ...vous pouvez, par exemple, rechercher 'tarte aux pommes', 'poisson', etc. </p>";
+	}
+
+}
+
+/**
+ * Sélectionne les recettes en fonction de la recherche lancée
+ *
+ * @param {*} recipes la liste des recettes issues du json
+ * @return le tableau des recettes sélectionnées
+ * 
+ */
+async function selectRecipes() {
+let elementMenu = document.getElementById("menuPrincipal");
+
+	elementMenu.addEventListener("keyup", (e) => {
+		e.preventDefault();
+		inputString = e.target.value.toLowerCase();
+		updateRecipes();
+	});
 }
 
 /**
@@ -87,15 +202,20 @@ async function init() {
 
 	/* Extraire les recettes du JSON et les afficher */
 	const { recipes } = await getRecipes();
-	displayRecipes(recipes);
+	allRecipes = recipes;
+	
+	displayRecipes(allRecipes);
+	selectRecipes();
 
-	/* Extraire les listes d'ingrédients, d'appareils et d'ustensiles des recettes, et active les écouteurs */
-	[ingredientsList, appliancesList, ustensilsList] = createResources(recipes);
-	displayLists(ingredientsList, appliancesList, ustensilsList);
+	/* Construire les listes d'ingrédients, d'appareils et d'ustensiles à partir des recettes,
+	/*  et active les écouteurs */
+	[ingredientsList, appliancesList, ustensilsList] = createResources(allRecipes);
+	activateLists();
 
 	/* Initialiser la table des tags */
 	selectedTags = new TagsArray();
 
 }
+
 
 init();

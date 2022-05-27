@@ -1,5 +1,5 @@
 // Déclaration
-import { selectedTags } from "../pages/index.js";
+import { selectedTags, updateRecipes } from "../pages/index.js";
 import { closeAllLists } from "../pages/index.js";
 import { clearString } from "../utils/string.js";
 
@@ -37,45 +37,67 @@ export class List {
 		let itemsListString = "";
 
 		for (let i = 0; i < this._elements.length; i++) {
-			itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${this._elements[i]}" data-type="${this._dataType}">${this._elements[i]}</i>`;
+			if (!selectedTags.existsTag(this._elements[i])) {
+				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${this._elements[i]}" data-type="${this._dataType}">${this._elements[i]}</i>`;
+			}
 		}
 
 		return itemsListString;
 	}
 
-	// Activation des listeners sur les boutons de chaque liste
+	// Affichage ou fermeture de la liste des éléments visés (ingrédients, appareils ou ustensiles)
 	activateList() {
+		console.log("activateList");
 		const elementMenu = document.getElementById(this._menuId);
 		const elementBtn = document.getElementById(this._btnId);
 		const elementUl = document.getElementById(this._listId);
 
-		elementBtn.addEventListener("click", (e) => {
-			e.preventDefault();
-			if (elementUl.classList.contains("items-display")) {
-				elementMenu.classList.remove(this._widthClass);
-				elementBtn.childNodes[1].style.transform = "rotate(0deg)";
-				elementUl.classList.remove("items-display");
-				return;
-			}
-			/*clearLists();*/
-			closeAllLists();
-			elementMenu.classList.add(this._widthClass);
-			elementBtn.childNodes[1].style.transform = "rotate(180deg)";
-			elementUl.classList.add("items-display");
-			elementUl.innerHTML = this.displayListDOM();
-			this.activateListItems();
-		});
-	}
+		if (elementUl.classList.contains("items-display")) {
+			elementMenu.classList.remove(this._widthClass);
+			elementBtn.childNodes[1].style.transform = "rotate(0deg)";
+			elementUl.classList.remove("items-display");
+			return;
+		};
+		closeAllLists();
+		elementMenu.classList.add(this._widthClass);
+		elementBtn.childNodes[1].style.transform = "rotate(180deg)";
+		elementUl.classList.add("items-display");
+		elementUl.innerHTML = this.displayListDOM();
+		this.activateListItems();
 
-	// Activation des listeners sur chaque élément de la liste
+	} 
+
+	// Activer des listeners sur chaque élément de la liste
 	activateListItems() {
+		console.log("activateListItems");
 		const listItems = document.querySelectorAll(`.${this._itemClass}`);
 		listItems.forEach((item) => {
 			item.addEventListener("click", (e) => {
+				e.preventDefault();
 				selectedTags.addTag(item.dataset.name, item.dataset.type);
+				this.removeListItem(item.dataset.name);
 				this.closeList();
+				e.stopPropagation();
 			});
 		});
+	}
+
+	// Supprimer un élément de la liste
+	removeListItem(itemName) {
+		let myIndex = this._elements.indexOf(itemName);
+		if (myIndex !== -1) {
+    	this._elements.splice(myIndex, 1);
+		}
+	}
+
+	// Ajouter un élément de la liste
+	addListItem(itemName) {
+		// console.log("addListItem", itemName)
+		let myIndex = this._elements.indexOf(itemName);
+		if (myIndex === -1) {
+	   	this._elements.push(itemName);
+			this._elements.sort();
+		} 
 	}
 
 	// Close list: display à none, largeur bouton mini, chevron vers le bas

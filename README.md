@@ -23,3 +23,4 @@ Comparaison des deux solutions avec l'outil JSben.ch
  - Livraison 2 : affichage des listes ingredients, appareils et ustensiles
  - Livraison 3 : Ajout et suppression des Tags
  - Livraison 4 : Ajout Fiche investigation de fonctionnalité
+ - Livraison 5 : Algo 1 de recherche

@@ -39,13 +39,10 @@ footer p {
   color: grey;
 }
 
-.card-Width {
-	width: 380px !important;
-}
-
-.card-Height {
+.card-Format {
 	height: 186px;
 	max-height: 186px;
+	border-radius: 0 0 6px 6px;
 }
 
 .font-Lato18 {
@@ -160,7 +157,7 @@ footer p {
 }
 
 .ustensils-extendedwidth {
-  width: 738px;
+  width: 737px;
 }
 
 .ingredients-list-item,
@@ -169,19 +166,45 @@ footer p {
   cursor: pointer;
 }
 
-#listIngredients,
- #listAppliances,
-  #listUstensils {
+#listIngredients {
   display: none;
   grid-template-columns: repeat(3, 2fr);
   grid-template-rows: 1fr;
-  align-items: center; 
+	border-radius: 0 0 5px 5px;
+  align-items: center;
   gap: 0.5rem 5rem;
   position: absolute;
   top: 75%;
-  left: 2%;
-/*  max-width: 666px; */
-  max-width: 734px;
+/*  max-width: 737px; */
+	width: 737px;
+  z-index: 10;
+	max-height: 360px;
+	overflow-y: scroll;
+}
+
+#listAppliances {
+	display: none;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: 1fr;
+	border-radius: 0 0 5px 5px;
+  align-items: center;
+  gap: 0.5rem 5rem;
+  position: absolute;
+  top: 75%;
+  width: 603px;
+  z-index: 10;
+}
+
+ #listUstensils {
+	display: none;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: 1fr;
+	border-radius: 0 0 5px 5px;
+  align-items: center;
+  gap: 0.5rem 4rem;
+  position: absolute;
+  top: 75%;
+  width: 714px;
   z-index: 10;
 }
 
@@ -228,10 +251,71 @@ footer p {
   margin-right: 1rem;
 }
 
-/* Responsive */
+#noRecipes {
+  font-size: 1.5rem;
+  width: auto;
+  margin: 2rem auto;
+  color: #D04F4F;
+}
+
+/**********************************************************************************************/
+/* Media queries for responsiveness                                                                                 */
+/**********************************************************************************************/
 @media (max-width: 1300px) {
 	/* Au passage sur deux colonnes, recentrer les cards des recettes */
 	.row-Recipes {
 		justify-content: space-around;
 	}
+}
+
+@media (max-width: 780px) {
+	/* Au passage sur deux colonnes, ajuster les largeurs */
+	#listIngredients {
+		grid-template-columns: repeat(2, 2fr);
+		grid-template-rows: 1fr;
+		gap: 0.5rem 2rem;
+		max-width: 553px;
+	}
+
+	.ingredients-extendedwidth {
+		width: 576px;
+	}
+
+	#listAppliances, #listUstensils {
+		grid-template-columns: repeat(2, 2fr);
+		grid-template-rows: 1fr;
+		gap: 0.5rem 2rem;
+		max-width: 510px;
+	}
+
+	.appliances-extendedwidth, .ustensils-extendedwidth {
+		width: 533px;
+	}
+
+}
+
+@media (max-width: 585px) {
+	/* Au passage sur une colonne, ajuster les largeurs */
+	#listIngredients {
+		grid-template-columns: repeat(1, 2fr);
+		grid-template-rows: 1fr;
+		gap: 0.5rem 2rem;
+		max-width: 246px;
+	}
+
+	.ingredients-extendedwidth {
+		width: 270px;
+	}
+
+	#listAppliances, #listUstensils {
+		grid-template-columns: repeat(1, 2fr);
+		grid-template-rows: 1fr;
+		gap: 0.5rem 2rem;
+		max-width: 247px;
+	}
+
+	.appliances-extendedwidth, .ustensils-extendedwidth {
+		width: 270px;
+	}
+
 }
