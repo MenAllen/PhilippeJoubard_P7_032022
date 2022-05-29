@@ -15,6 +15,7 @@ export class List {
 	constructor(data, dataType, menuId, listId, btnId, itemClass, widthClass) {
 		this._elements = data;
 		this._dataType = dataType;
+		this._input = "";
 		this._menuId = menuId;
 		this._listId = listId;
 		this._btnId = btnId;
@@ -28,7 +29,13 @@ export class List {
 		let elementMenu = document.getElementById(this._menuId);
 		elementMenu.addEventListener("keyup", (e) => {
 			e.preventDefault();
-			console.log(`Listener ${this._menuId}`);
+			e.stopImmediatePropagation();
+			this._input = e.target.value.toLowerCase();
+			if (this._input.length > 2) {
+				this._elements = this._elements.filter((elt) => elt.toLowerCase().includes(this._input.toLowerCase()));
+				document.getElementById(this._listId).classList.remove("items-display");
+				this.activateList();
+			}
 		});
 	}
 
@@ -47,10 +54,9 @@ export class List {
 
 	// Affichage ou fermeture de la liste des éléments visés (ingrédients, appareils ou ustensiles)
 	activateList() {
-		console.log("activateList");
-		const elementMenu = document.getElementById(this._menuId);
-		const elementBtn = document.getElementById(this._btnId);
-		const elementUl = document.getElementById(this._listId);
+		let elementMenu = document.getElementById(this._menuId);
+		let elementBtn = document.getElementById(this._btnId);
+		let elementUl = document.getElementById(this._listId);
 
 		if (elementUl.classList.contains("items-display")) {
 			elementMenu.classList.remove(this._widthClass);
@@ -77,6 +83,7 @@ export class List {
 				selectedTags.addTag(item.dataset.name, item.dataset.type);
 				this.removeListItem(item.dataset.name);
 				this.closeList();
+				this.clearInput();
 				e.stopPropagation();
 			});
 		});
@@ -102,8 +109,16 @@ export class List {
 
 	// Close list: display à none, largeur bouton mini, chevron vers le bas
 	closeList() {
+		console.log("closeList", this._listId);
 		document.getElementById(this._listId).classList.remove("items-display");
 		document.getElementById(this._menuId).classList.remove(this._widthClass);
 		document.getElementById(this._btnId).childNodes[1].style.transform = "rotate(0deg)";
+	}
+
+	//
+	clearInput() {
+//		this._input = "";
+		document.getElementById(this._dataType).value = "";
+		updateRecipes();
 	}
 }

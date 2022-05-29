@@ -8,9 +8,12 @@ import { TagsArray } from "../models/tags.js";
 export let ingredientsList;
 export let appliancesList;
 export let ustensilsList;
+export let inputIngredients = "";				// input de la recherche ingredients
+export let inputAppliances = "";				// input de la recherche appliances
+export let inputUstensils = "";					// input de la recherche ustensils
 
 // Variables de travail
-let inputString = "";										// expression d'entrée de la recherche générale
+let inputString = "";										// input de la recherche générale
 let allRecipes = [];										// les 50 recettes chargées depuis 
 let filteredRecipes = [];								// les recettes filtrées par l'expression d'entrée
 let tagFilteredRecipes = []							// les recettes filtrées par les tags et l'expression d'entrée
@@ -48,7 +51,6 @@ function activateLists() {
 			updateRecipes();
 			closeAllLists();
 		} else {
-			console.log(inputString);
 			closeAllLists();
 		}
 		e.stopImmediatePropagation();
@@ -115,7 +117,6 @@ async function displayRecipes(recipes) {
  */
 function tagFilterRecipes(listRecipes) {
 
-	// console.log("tagFilterRecipes", selectedTags._tableT);
 	let len = selectedTags._tableT.length;
 
 	if (len > 0) {
@@ -145,7 +146,6 @@ function tagFilterRecipes(listRecipes) {
 		});
 
 		tagFilteredRecipes = listRecipes;
-		console.log(tagFilteredRecipes);
 		return;
 	}
 	tagFilteredRecipes = listRecipes;
@@ -159,7 +159,6 @@ export function updateRecipes() {
 
 	filteredRecipes = allRecipes;
 
-	console.log(inputString);
 	if (inputString.length >= 3) {
 		filteredRecipes = allRecipes.filter((recipe) => {
 			return (
