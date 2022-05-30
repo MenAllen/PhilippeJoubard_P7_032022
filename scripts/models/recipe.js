@@ -23,7 +23,7 @@ export class Recipe {
 
 	/**
 	 * Construit la liste des ingrédients de la recette pour utilisation dans RecipeCardDom:
-	 * (Ingredient): (Quantité) (Unité)
+	 * (Ingredient): (Quantité) (Unité). Au passage 'grammes' devient 'g'
 	 *
 	 * @readonly
 	 * @memberof Recipe
@@ -36,7 +36,7 @@ export class Recipe {
 				return `			
 			<strong>${element.ingredient}</strong>
 			${ "quantity" in element ? `: ${element.quantity}` : ""}
-			${ "unit" in element ? element.unit : "" }<br>`;
+			${ "unit" in element ? (element.unit == "grammes" ? "g" : element.unit) : "" }<br>`;
 			})
 			.join("");
 		

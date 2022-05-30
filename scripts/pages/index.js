@@ -208,7 +208,9 @@ elementMenu.value = "";
 	elementMenu.addEventListener("keyup", (e) => {
 		e.preventDefault();
 		inputString = e.target.value.toLowerCase();
-		updateRecipes();
+		if (inputString.length > 2) {
+			updateRecipes();
+		}
 	});
 }
 
