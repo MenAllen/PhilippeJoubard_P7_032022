@@ -42,11 +42,11 @@ function activateLists() {
 		e.preventDefault();
 		console.log("click :", e.target);
 		if (e.target.classList.contains("chevronIngredients")) {
-			ingredientsList.activateList();
+			ingredientsList.activateList(false);
 		} else if (e.target.classList.contains("chevronAppliances")) {
-			appliancesList.activateList(); 
+			appliancesList.activateList(false); 
 		} else if (e.target.classList.contains("chevronUstensils")) {
-			ustensilsList.activateList();	
+			ustensilsList.activateList(false);	
 		} else if (e.target.classList.contains("fa-search")) {
 			updateRecipes();
 			closeAllLists();
@@ -65,8 +65,22 @@ function activateLists() {
  */
 function updateLists(recipes) {
 
-	[ingredientsList, appliancesList, ustensilsList] = createResources(recipes);
-	activateLists();
+	console.log("updateLists");
+
+	let tabIngredients = [];
+	let tabAppliances = [];
+	let tabUstensils = [];
+
+	recipes.forEach((recipe) => {
+		tabIngredients = [...new Set([...tabIngredients, ...recipe.ingredients.map((elt) => elt.ingredient)])].sort();
+		tabAppliances = [...new Set([...tabAppliances, ...[recipe.appliance.replace(".","")]])].sort();
+		tabUstensils = [...new Set([...tabUstensils, ...recipe.ustensils])].sort();
+	});
+
+	ingredientsList.updateList(tabIngredients);
+	appliancesList.updateList(tabAppliances);
+	ustensilsList.updateList(tabUstensils);
+
 }
 
 /**
@@ -157,7 +171,9 @@ function tagFilterRecipes(listRecipes) {
  */
 export function updateRecipes() {
 
+	console.log("updateRecipes");
 	filteredRecipes = allRecipes;
+	tagFilteredRecipes = allRecipes;
 
 	if (inputString.length >= 3) {
 		filteredRecipes = allRecipes.filter((recipe) => {
@@ -166,9 +182,10 @@ export function updateRecipes() {
 			)
 		});
 	}
+
 	tagFilterRecipes(filteredRecipes);
 	displayRecipes(tagFilteredRecipes);
-	updateLists(tagFilteredRecipes);
+	updateLists(tagFilteredRecipes);	
 
 	if (tagFilteredRecipes.length === 0) {
 		document.getElementById("recipes-display-section").innerHTML =
@@ -186,6 +203,7 @@ export function updateRecipes() {
  */
 async function selectRecipes() {
 let elementMenu = document.getElementById("menuPrincipal");
+elementMenu.value = "";
 
 	elementMenu.addEventListener("keyup", (e) => {
 		e.preventDefault();

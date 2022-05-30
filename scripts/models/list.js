@@ -33,10 +33,11 @@ export class List {
 			this._input = e.target.value.toLowerCase();
 			if (this._input.length > 2) {
 				this._elements = this._elements.filter((elt) => elt.toLowerCase().includes(this._input.toLowerCase()));
-				document.getElementById(this._listId).classList.remove("items-display");
-				this.activateList();
+				this.activateList(true);
 			}
+			updateRecipes();
 		});
+
 	}
 
 	// Affichage de la liste des éléments ingrédients, appliances ou ustensiles
@@ -52,17 +53,24 @@ export class List {
 		return itemsListString;
 	}
 
-	// Affichage ou fermeture de la liste des éléments visés (ingrédients, appareils ou ustensiles)
-	activateList() {
+	/**
+	 * Affichage ou fermeture de la liste des éléments visés (ingrédients, appareils ou ustensiles)
+	 * 
+	 * @param {*} open boolean True => afficher la liste / False: ouvrir ou fermer selon l'état actuel
+	 * @returns 
+	 */
+	activateList(open) {
 		let elementMenu = document.getElementById(this._menuId);
 		let elementBtn = document.getElementById(this._btnId);
 		let elementUl = document.getElementById(this._listId);
 
-		if (elementUl.classList.contains("items-display")) {
-			elementMenu.classList.remove(this._widthClass);
-			elementBtn.childNodes[1].style.transform = "rotate(0deg)";
-			elementUl.classList.remove("items-display");
-			return;
+		if (!open) {
+			if (elementUl.classList.contains("items-display")) {
+				elementMenu.classList.remove(this._widthClass);
+				elementBtn.childNodes[1].style.transform = "rotate(0deg)";
+				elementUl.classList.remove("items-display");
+				return;
+			};
 		};
 		closeAllLists();
 		elementMenu.classList.add(this._widthClass);
@@ -75,7 +83,6 @@ export class List {
 
 	// Activer des listeners sur chaque élément de la liste
 	activateListItems() {
-		console.log("activateListItems");
 		const listItems = document.querySelectorAll(`.${this._itemClass}`);
 		listItems.forEach((item) => {
 			item.addEventListener("click", (e) => {
@@ -99,7 +106,6 @@ export class List {
 
 	// Ajouter un élément de la liste
 	addListItem(itemName) {
-		// console.log("addListItem", itemName)
 		let myIndex = this._elements.indexOf(itemName);
 		if (myIndex === -1) {
 	   	this._elements.push(itemName);
@@ -107,9 +113,14 @@ export class List {
 		} 
 	}
 
+	updateList(tabList) {
+		this._elements = tabList;
+		// Nettoyage de la liste des ingredients: accents et fautes d'orthographe
+		this._elements = clearString(this._elements);
+	}
+
 	// Close list: display à none, largeur bouton mini, chevron vers le bas
 	closeList() {
-		console.log("closeList", this._listId);
 		document.getElementById(this._listId).classList.remove("items-display");
 		document.getElementById(this._menuId).classList.remove(this._widthClass);
 		document.getElementById(this._btnId).childNodes[1].style.transform = "rotate(0deg)";
@@ -117,7 +128,7 @@ export class List {
 
 	//
 	clearInput() {
-//		this._input = "";
+		this._input = "";
 		document.getElementById(this._dataType).value = "";
 		updateRecipes();
 	}

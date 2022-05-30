@@ -61,7 +61,6 @@ export class TagsArray {
 			}
 		}
 
-    // console.log("removeTag :", index, type);
 		if (index != -1) {
 			liElement.remove();
 			this._tableT.splice(index, 1);
@@ -85,10 +84,9 @@ export class TagsArray {
 
   // Ajouter un Tag
 	addTag(name, type) {
-    // console.log("addTag");
-		if (!this.existsTag(name)) {
+
+    if (!this.existsTag(name)) {
 			// insérer un nouvel élément
-      // console.log("addTag Push");
 			this._tableT.push([name, type]);
 
       let color = this.getTagcolor(type);
