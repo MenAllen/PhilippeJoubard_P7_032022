@@ -21,10 +21,10 @@ export class List {
 		this._btnId = btnId;
 		this._itemClass = itemClass;
 		this._widthClass = widthClass;
-		this._actives = data.map((i) => true);
 
 		// Nettoyage de la liste des ingredients: accents et fautes d'orthographe
 		this._elements = clearString(this._elements);
+		this._actives = this._elements;
 
 		const elementMenu = document.getElementById(this._menuId);
 
@@ -34,8 +34,10 @@ export class List {
 			e.stopImmediatePropagation();
 			this._input = e.target.value.toLowerCase();
 			if (this._input.length > 2) {
-				this._elements = this._elements.filter((elt) => elt.toLowerCase().includes(this._input.toLowerCase()));
+				this._actives = this._actives.filter((elt) => elt.toLowerCase().includes(this._input.toLowerCase()));
 				this.activateInputList();
+			} else {
+				this._actives = this._elements;
 			}
 		});
 
@@ -48,6 +50,19 @@ export class List {
 		for (let i = 0; i < this._elements.length; i++) {
 			if (!selectedTags.existsTag(this._elements[i])) {
 				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${this._elements[i]}" data-type="${this._dataType}">${this._elements[i]}</i>`;
+			}
+		}
+
+		return itemsListString;
+	}
+
+	// Affichage de la liste des éléments trouvés dan this_elements à partir de l'expression rentrée dans l'input
+	displayInputListDOM() {
+		let itemsListString = "";
+
+		for (let i = 0; i < this._actives.length; i++) {
+			if (!selectedTags.existsTag(this._actives[i])) {
+				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${this._actives[i]}" data-type="${this._dataType}">${this._actives[i]}</i>`;
 			}
 		}
 
@@ -82,7 +97,7 @@ export class List {
 	/**
 	 * Affichage de la liste des éléments trouvés suite à l'input de 3 caractères ou plus
 	 * Les éléments sont listés sur une seule colonne
-	 * La fermeture se fera via les closelists
+	 * La fermeture se fera via les closelists ou un click
 	 */
 	activateInputList() {
 		const elementMenu = document.getElementById(this._menuId);
@@ -90,7 +105,7 @@ export class List {
 
 		elementMenu.classList.add("input-extendedwidth");
 		elementUl.classList.add("items-display", "inputList");
-		elementUl.innerHTML = this.displayListDOM();
+		elementUl.innerHTML = this.displayInputListDOM();
 		this.activateListItems();
 	}
 
@@ -151,7 +166,8 @@ export class List {
 		document.getElementById(this._listId).classList.remove("items-display", "inputList");
 		document.getElementById(this._menuId).classList.remove(this._widthClass, "input-extendedwidth");
 		document.getElementById(this._btnId).childNodes[1].style.transform = "rotate(0deg)";
-		document.getElementById(this._dataType).value = "";
+		document.getElementById(this._dataType).value = "";		
+		this._actives = this._elements;
 		this._input = "";
 	}
 
