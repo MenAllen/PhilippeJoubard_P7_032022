@@ -1,11 +1,6 @@
-footer {
-	padding-top: 3rem;
-	padding-bottom: 3rem;
-}
-
-footer p {
-	margin-bottom: 0.25rem;
-}
+/**********************************************************************************************/
+/* Styles de base                                                                             */
+/**********************************************************************************************/
 
 .box-shadow {
 	box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
@@ -29,20 +24,6 @@ footer p {
 
 .c-white {
   color: white!important;
-}
-
-.form-Maxwidth {
-	width: 1240px;
-}
-
-.form-control:focus {
-  color: grey;
-}
-
-.card-Format {
-	height: 186px;
-	max-height: 186px;
-	border-radius: 0 0 6px 6px;
 }
 
 .font-Lato18 {
@@ -86,6 +67,33 @@ footer p {
 
 .header-logo {
 	width: 50px;
+}
+
+footer {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
+footer p {
+	margin-bottom: 0.25rem;
+}
+
+/**********************************************************************************************/
+/* Styles de formulaire de recherche et d'affichage des recettes                                                           */
+/**********************************************************************************************/
+
+.form-Maxwidth {
+	width: 1240px;
+}
+
+.form-control:focus {
+  color: grey;
+}
+
+.card-Format {
+	height: 186px;
+	max-height: 186px;
+	border-radius: 0 0 6px 6px;
 }
 
 #btnIngredients:hover,
@@ -179,7 +187,7 @@ footer p {
   z-index: 10;
 	max-height: 360px;
 	overflow-y: scroll;
-	scrollbar-width: none;
+	scrollbar-width: thin;
 }
 
 .inputList {
@@ -269,7 +277,7 @@ footer p {
 }
 
 /**********************************************************************************************/
-/* Media queries for responsiveness                                                                                 */
+/* Media queries pour le responsive                                                           */
 /**********************************************************************************************/
 @media (max-width: 1300px) {
 	/* Au passage sur deux colonnes, recentrer les cards des recettes */

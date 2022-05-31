@@ -45,7 +45,7 @@ export class TagsArray {
     return exists;
   }
 
-  // Supprimer un Tag
+  // Supprime un Tag
 	removeTag(event) {
 
 		// Récupérer l'élément <li> et les noms et types dans le dataset
@@ -100,7 +100,7 @@ export class TagsArray {
         </li>
       `;
 
-      let tabclose = document.querySelectorAll("#closetag");
+      const tabclose = document.querySelectorAll("#closetag");
 			// Configurer le listener sur tous les éléments <li>
 			tabclose.forEach((li) => {
         li.addEventListener("click", (e) => {

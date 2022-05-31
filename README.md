@@ -26,3 +26,4 @@ Comparaison des deux solutions avec l'outil JSben.ch
  - Livraison 5 : Algo 1 de recherche
  - Livraison 6 : Ajout input ingredients, appliances, ustensils
  - Livraison 7 : Corrections scroll, format input ing, appli & ustensils
+ - Livraison 8 : Ajout commentaires, thin scrollbar et fix fiche investigation

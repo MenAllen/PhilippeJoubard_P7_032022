@@ -6,9 +6,16 @@ import { clearString } from "../utils/string.js";
 /**
  * Classe Liste
  *
- * @Property (array) name - tableau des éléments de la liste
- * @property (array) active - tableau de booleens des elements de liste actifs ou non actifs
- *
+ * @Property (array) elements - tableau des éléments de la liste
+ * @property (string) dataType - type de tableau: £ingredients, $appliances ou $ustensils
+ * @property (string) input - l'expression entrée
+ * @property (string) menuId - l'id de l'élément menu
+ * @property (string) listId - l'id de l'élément liste
+ * @property (string) btnId - l'id du bouton
+ * @property (string) itemClass - la classe de l'element i
+ * @property (string) widthClass - la largeur spécifique de la liste
+ * @property (array) actives - tableau des éléments de la liste sélectionnés suite à l'entrée d'une expression dans l'input
+ * 
  * */
 
 export class List {
@@ -43,7 +50,12 @@ export class List {
 
 	}
 
-	// Affichage de la liste des éléments ingrédients, appliances ou ustensiles
+	/**
+	 *  Affichage de la liste des éléments ingrédients, appliances ou ustensiles
+	 *  On omet les tags créés de la liste
+	 * 
+	 * @returns string fait des éléments <i> trouvés
+	 */
 	displayListDOM() {
 		let itemsListString = "";
 
@@ -172,7 +184,7 @@ export class List {
 	}
 
 	/**
-	 * Effacement de la valeur de l'input
+	 * Effacement de la valeur de l'input et update de l'affichage des recettes
 	 */
 	clearInput() {
 		this._input = "";
