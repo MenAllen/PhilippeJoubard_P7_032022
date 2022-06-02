@@ -30,10 +30,11 @@ export function clearString(stringArray) {
 	let tabExceptions = ["Bananes", "Huile d'olives", "Kiwis", "Pommes"];
 	const tabCorrections = [
 		["casserolle", "casserole"],
+		["Casserolle", "Casserole"],
 		["Crème Fraiche", "Crème fraîche"],
 		["Crème fraiche", "Crème fraîche"],
 		["Crème Fraîche", "Crème fraîche"],
-    ["Crême Fraîche", "Crème fraîche"],
+    ["Crême fraîche", "Crème fraîche"],
     ["cuillère en bois", "Cuillère en bois"],
     ["cuillère à Soupe", "Cuillère à Soupe"],
 		["couteau", "Couteau"],
