@@ -101,7 +101,7 @@ function createResources(recipes) {
 }
 
 /**
- * Afficher toutes les recettes sur la page d'accueil
+ * Afficher toutes les recettes sur la page d'accueil après création des objets recettes
  *
  * @param {*} recipes la liste des recettes issues du json
  */
@@ -155,17 +155,17 @@ function tagFilterRecipes(listRecipes) {
  *  Mettre à jour les recettes affichées
  */
 export function updateRecipes() {
-	console.log("updateRecipes");
+	console.log("updateRecipes", allRecipes);
 	filteredRecipes = allRecipes;
 	tagFilteredRecipes = allRecipes;
 
 	if (inputString.length >= 3) {
 		filteredRecipes = allRecipes.filter((recipe) => {
 			return (
-				recipe.name.toLowerCase().includes(inputString) ||
-				recipe.description.toLowerCase().includes(inputString) ||
+				recipe.name.toLowerCase().includes(inputString.toLowerCase()) ||
+				recipe.description.toLowerCase().includes(inputString.toLowerCase()) ||
 				recipe.ingredients.some((item) => {
-					item.ingredient.toLowerCase().includes(inputString);
+					item.ingredient.toLowerCase().includes(inputString.toLowerCase());
 				})
 			);
 		});

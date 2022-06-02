@@ -1,20 +1,4 @@
 /**
- *
- * @param {*} a
- * @returns string
- */
-function strNoAccent(a) {
-	var b = "áàâäãåçéèêëíïîìñóòôöõúùûüýÁÀÂÄÃÅÇÉÈÊËÍÏÎÌÑÓÒÔÖÕÚÙÛÜÝ",
-		c = "aaaaaaceeeeiiiinooooouuuuyAAAAAACEEEEIIIINOOOOOUUUUY",
-		d = "";
-	for (var i = 0, j = a.length; i < j; i++) {
-		var e = a.substr(i, 1);
-		d += b.indexOf(e) !== -1 ? c.substr(b.indexOf(e), 1) : e;
-	}
-	return d;
-}
-
-/**
  * clearString est un utilitaire de traitement de chaine de caractères
  * entree : tableau de chaines de caractères
  *
@@ -34,9 +18,9 @@ export function clearString(stringArray) {
 		["Crème Fraiche", "Crème fraîche"],
 		["Crème fraiche", "Crème fraîche"],
 		["Crème Fraîche", "Crème fraîche"],
-    ["Crême fraîche", "Crème fraîche"],
-    ["cuillère en bois", "Cuillère en bois"],
-    ["cuillère à Soupe", "Cuillère à Soupe"],
+		["Crême fraîche", "Crème fraîche"],
+		["cuillère en bois", "Cuillère en bois"],
+		["cuillère à Soupe", "Cuillère à Soupe"],
 		["couteau", "Couteau"],
 		["économe", "Économe"],
 		["poelle à frire", "Poelle à frire"],
@@ -45,14 +29,14 @@ export function clearString(stringArray) {
 		["farine", "Farine"],
 		["huile d'olive", "Huile d'olive"],
 		["huile d'olives", "Huile d'olive"],
-		["gruyère râpé", "Gruyère râpé"]
+		["gruyère râpé", "Gruyère râpé"],
 	];
 
 	// Enlever les "s" pour éviter les doublons
 	for (let i = 0; i < stringArray.length; i++) {
 		workingArray[i] = stringArray[i];
 		if (workingArray[i].endsWith("s")) {
-			if (tabExceptions.indexOf(workingArray[i]) != -1) {
+			if (tabExceptions.indexOf(workingArray[i]) !== -1) {
 				str = workingArray[i].slice(0, -1);
 				workingArray[i] = str;
 			}

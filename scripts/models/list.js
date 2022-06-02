@@ -1,5 +1,5 @@
 // Déclaration
-import { selectedTags, updateRecipes } from "../pages/index.js";
+import { selectedTags } from "../pages/index.js";
 import { closeAllLists } from "../pages/index.js";
 import { clearString } from "../utils/string.js";
 
@@ -95,7 +95,7 @@ export class List {
 			elementBtn.childNodes[1].style.transform = "rotate(0deg)";
 			elementUl.classList.remove("items-display", "inputList");
 			return;
-		};
+		}
 
 		closeAllLists();
 		elementMenu.classList.add(this._widthClass);
@@ -145,7 +145,7 @@ export class List {
 	removeListItem(itemName) {
 		const myIndex = this._elements.indexOf(itemName);
 		if (myIndex !== -1) {
-    	this._elements.splice(myIndex, 1);
+			this._elements.splice(myIndex, 1);
 		}
 	}
 
@@ -156,7 +156,7 @@ export class List {
 	addListItem(itemName) {
 		const myIndex = this._elements.indexOf(itemName);
 		if (myIndex === -1) {
-	   	this._elements.push(itemName);
+			this._elements.push(itemName);
 			this._elements.sort();
 		} 
 	}

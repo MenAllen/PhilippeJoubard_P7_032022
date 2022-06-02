@@ -8,6 +8,7 @@
  * @Property (string) description - Description de la recette
  * @Property (string) appliance - Appareil pour réaliser la recette
  * @Property (array) ustensils - Table des ustensiles pour réaliser la recette
+ * @Property (boolean) active - Recette visualisée ou non
  * */
 
 export class Recipe {
@@ -19,6 +20,7 @@ export class Recipe {
 		this._description = data.description;
 		this._appliance = data.appliance;
 		this._ustensils = data.ustensils;
+		this._active = true;
 	}
 
 	/**
@@ -36,7 +38,7 @@ export class Recipe {
 				return `			
 			<strong>${element.ingredient}</strong>
 			${ "quantity" in element ? `: ${element.quantity}` : ""}
-			${ "unit" in element ? (element.unit == "grammes" ? "g" : element.unit) : "" }<br>`;
+			${ "unit" in element ? (element.unit === "grammes" ? "g" : element.unit) : "" }<br>`;
 			})
 			.join("");
 		
