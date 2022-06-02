@@ -30,14 +30,14 @@
 				<!-- Logo Les petits plats -->
 				<div class="d-flex flex-column align-items-center">
 					<img src="assets/icons/vector.svg" class="header-logo" alt="logo les petits plats" />
-					<h1 class="header-titre">Les petits plats</h1>
+					<h1 id="top" class="header-titre">Les petits plats</h1>
 				</div>
 			</div>
 		</header>
 
 		<main>
 			<!-- Recherche de recettes avec filtres ingrédients, Appareils et ustenseiles -->
-			<div id="top"  class="container-Recipes">
+			<div class="container-Recipes">
 				<form>
 					<!-- Barre de recherche -->
 					<div class="input-group">
@@ -91,7 +91,6 @@
 
 				<!-- Liste des recettes -->
 				<div id="recipes-display-section" class="row align-items-center mt-3">
-<!--					<div id="recipes-display-section" class="row p-0"></div> -->
 				</div>
 			</div>
 		</main>
@@ -99,7 +98,7 @@
 		<footer class="text-muted">
 			<div class="container">
 				<p class="float-right">
-					<a href="#top">Back to top</a>
+					<a href="index.html#top">Back to top</a>
 				</p>
 			</div>
 		</footer>
@@ -113,5 +112,6 @@
 
 		<script src="scripts/utils/APIfetch.js" type="module"></script>
 		<script src="scripts/pages/index.js" type="module"></script>
+
 	</body>
 </html>

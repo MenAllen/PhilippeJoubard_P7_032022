@@ -189,6 +189,5 @@ export class List {
 	clearInput() {
 		this._input = "";
 		document.getElementById(this._dataType).value = "";
-		updateRecipes();
 	}
 }

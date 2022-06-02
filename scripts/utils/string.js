@@ -30,10 +30,11 @@ export function clearString(stringArray) {
 	let tabExceptions = ["Bananes", "Huile d'olives", "Kiwis", "Pommes"];
 	const tabCorrections = [
 		["casserolle", "casserole"],
+		["Casserolle", "Casserole"],	
 		["Crème Fraiche", "Crème fraîche"],
 		["Crème fraiche", "Crème fraîche"],
 		["Crème Fraîche", "Crème fraîche"],
-    ["Crême Fraîche", "Crème fraîche"],
+    ["Crême fraîche", "Crème fraîche"],
     ["cuillère en bois", "Cuillère en bois"],
     ["cuillère à Soupe", "Cuillère à Soupe"],
 		["couteau", "Couteau"],
@@ -71,3 +72,25 @@ export function clearString(stringArray) {
 	uniqueworkingArray = [...new Set(workingArray.sort())];
 	return uniqueworkingArray;
 }
+
+/**
+ * la fonction filterTab réalise un filtrage sur le tableau de recettes reçu 
+ * Un tableau de booleens de même longueur lui indique si chacn des éléments doit
+ * être filtré ou non
+ * 
+ * @param {*} inputTab le tableau à filtrer
+ * @param {*} indexTab la table des index à true ou false
+ * @returns tableau filtré
+ */
+export function filterTab(inputTab, indexTab) {
+
+	let resultTab=[]
+
+	for (let i in indexTab) {
+		if (indexTab[i]) {
+			resultTab.push(inputTab[i]);
+		}
+	}
+	return resultTab;
+};
+
