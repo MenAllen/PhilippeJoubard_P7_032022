@@ -38,13 +38,11 @@ export class List {
 		/* Sur keyup, si plus de 2 caractères, on recherche les items sélectionnables */
 		elementMenu.addEventListener("keyup", (e) => {
 			e.preventDefault();
-			e.stopImmediatePropagation();
 			this._input = e.target.value.toLowerCase();
+			this._actives = this._elements;
 			if (this._input.length > 2) {
 				this._actives = this._actives.filter((elt) => elt.toLowerCase().includes(this._input.toLowerCase()));
 				this.activateInputList();
-			} else {
-				this._actives = this._elements;
 			}
 		});
 
