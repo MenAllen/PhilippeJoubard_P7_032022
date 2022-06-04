@@ -1,0 +1,12 @@
+{
+  "name": "fisheye",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --max-warnings=0 ."
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.16.0"
+  }
+}

@@ -29,18 +29,15 @@ export class Recipe {
 	 * @memberof Recipe
 	 */
 	get ingredients() {
-		let listeIngredients = ``;
-
-		listeIngredients = this._ingredients
-			.map((element) => {
-				return `			
+		
+		return this._ingredients
+		.map((element) => {
+			return `			
 			<strong>${element.ingredient}</strong>
 			${ "quantity" in element ? `: ${element.quantity}` : ""}
-			${ "unit" in element ? (element.unit == "grammes" ? "g" : element.unit) : "" }<br>`;
-			})
-			.join("");
-		
-		return listeIngredients;
+			${ "unit" in element ? (element.unit === "grammes" ? "g" : element.unit) : "" }<br>`;
+		})
+		.join("");
 	}
 
 	/**
@@ -68,4 +65,49 @@ export class Recipe {
 			 		</div>
 		 		</article>`;
 	}
+
+	// Tester la présence d'une expression dans le nom, la description ou les ingredients de la recette
+	mainSearch (paramString) {
+		return (
+			this._name.toLowerCase().includes(paramString.toLowerCase()) ||
+			this._description.toLowerCase().includes(paramString.toLowerCase()) ||
+			(() => { for (let j in this._ingredients) {
+					if ( this._ingredients[j].ingredient.toLowerCase().includes(paramString.toLowerCase()) ) {
+						return true;
+					}
+				}
+				return false;
+			})());
+	}
+
+	// Tester la présence d'une expression dans l'appareil utilisé pour la recette
+	applianceSearch (paramString) {
+		return (this._appliance.toLowerCase().includes(paramString.toLowerCase()));
+	}
+
+	// Tester la présence d'une expression dans les ustensiles de la recette
+	ustensilsSearch (paramString) {
+		return (this._ustensils.find((elt) => elt.toLowerCase().includes(paramString.toLowerCase())));
+	}
+
+	// Tester la présence d'une expression dans les ingrédienst de la recette
+	ingredientsSearch (paramString) {
+		return (this._ingredients.find((elt) => elt.ingredient.toLowerCase() === paramString.toLowerCase()));
+	}
+
+	// retourner la liste des ingrédients de la recette
+	getIngredientsList() {
+		return (this._ingredients.map((elt) => elt.ingredient));
+	}
+
+	// retourner la liste des ustensils de la recette
+	getUstensilsList() {
+		return (this._ustensils);
+	}
+
+	// retourner l'appliance nécessaire pour la recette
+	getAppliance() {
+		return (this._appliance.replace(".",""));
+	}
+
 }

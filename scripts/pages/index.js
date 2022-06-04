@@ -3,19 +3,17 @@ import { getRecipes } from "../utils/APIfetch.js";
 import { Recipe } from "../models/recipe.js";
 import { List } from "../models/list.js";
 import { TagsArray } from "../models/tags.js";
-import { filterTab } from "../utils/string.js"
+
+// Tableaux de travail
+const recipeObjects = []; 			// Tableau des objets recettes
+let filteredRecipes = []; 			// Tableau des objets recettes filtrées par l'expression d'entrée et/ou les tags
+let inputString = ""; 					// Input de la recherche générale
+export let selectedTags; 				// Tableau des tags sélectionnés
 
 // Listes des ingredients, appareils et ustensiles
 export let ingredientsList;
 export let appliancesList;
 export let ustensilsList;
-
-// Variables de travail
-let inputString = ""; 					// input de la recherche générale
-let allRecipes = []; 						// les 50 recettes chargées depuis le fichier
-let filteredRecipes = []; 			// les recettes filtrées par l'expression d'entrée
-let tagFilteredRecipes = []; 		// les recettes filtrées par les tags et l'expression d'entrée
-export let selectedTags; 				// le tableau des tags sélectionnés
 
 /**
  * Fermer les 3 menus dropdown
@@ -37,7 +35,6 @@ export function closeAllLists() {
 function activateLists() {
 	document.body.addEventListener("click", (e) => {
 		e.preventDefault();
-		console.log("click :", e.target);
 		if (e.target.classList.contains("chevronIngredients")) {
 			ingredientsList.activateList();
 		} else if (e.target.classList.contains("chevronAppliances")) {
@@ -50,79 +47,52 @@ function activateLists() {
 			}
 			closeAllLists();
 		}
-		e.stopImmediatePropagation();
 	});
 }
 
 /**
- * Mise à jour des listes à partir d'une liste de recettes
- *
- * @param {*} recipes
+ * Fonction de Mise à jour des 3 listes à partir de la liste de recettes filteredRecipes
+ * à partir de la table filteredRecipes des objets recette
+ * Set permet d'ignorer les doublons
  */
-function updateLists(recipes) {
-	console.log("updateLists");
+function updateLists() {
 
 	let tabIngredients = [];
 	let tabAppliances = [];
 	let tabUstensils = [];
 
-	for (let i in recipes) {
+	filteredRecipes.forEach((recipe) => {
+		tabIngredients = [...new Set([...tabIngredients, ...recipe.getIngredientsList()])].sort();
+		tabAppliances = [...new Set([...tabAppliances, ...[recipe.getAppliance()]])].sort();
+		tabUstensils = [...new Set([...tabUstensils, ...recipe.getUstensilsList()])].sort();
+	});
 
-		for (let j in recipes[i].ingredients) {
-			if (!tabIngredients.includes(recipes[i].ingredients[j].ingredient)) {
-				tabIngredients.push(recipes[i].ingredients[j].ingredient);
-			}
-		}
-
-		if (!tabAppliances.includes(recipes[i].appliance)) {
-			tabAppliances.push(recipes[i].appliance.replace(".", ""));
-		}
-
-		for (let k in recipes[i].ustensils) {
-			if (!tabIngredients.includes(recipes[i].ustensils[k])) {
-				tabUstensils.push(recipes[i].ustensils[k]);
-			}
-		}
-	}
-
-	ingredientsList.updateList(tabIngredients.sort());
-	appliancesList.updateList(tabAppliances.sort());
-	ustensilsList.updateList(tabUstensils.sort());
+	ingredientsList.updateList(tabIngredients);
+	appliancesList.updateList(tabAppliances);
+	ustensilsList.updateList(tabUstensils);
 }
 
 /**
- * Créer la liste des ingrédients, des appareils et des ustensiles
- * à partir des recettes fournies. Permet d'ignorer les doublons
+ * Créer les listes des ingrédients, des appareils et des ustensiles
+ * à partir de la table de toutes les recettes.
+ * Set permet d'ignorer les doublons
  *
  * @param {*} recipes la liste des recettes issues du json
  */
-function createResources(recipes) {
+function createLists(recipes) {
 	let tabIngredients = [];
 	let tabAppliances = [];
 	let tabUstensils = [];
 
-	for (let i in recipes) {
+	recipes.forEach((recipe) => {
+		tabIngredients = [...new Set([...tabIngredients, ...recipe.ingredients.map((elt) => elt.ingredient)])].sort();
+		tabAppliances = [...new Set([...tabAppliances, ...[recipe.appliance.replace(".", "")]])].sort();
+		tabUstensils = [...new Set([...tabUstensils, ...recipe.ustensils])].sort();
+	});
 
-		for (let j in recipes[i].ingredients) {
-			if (!tabIngredients.includes(recipes[i].ingredients[j].ingredient)) {
-				tabIngredients.push(recipes[i].ingredients[j].ingredient);
-			}
-		}
-
-		if (!tabAppliances.includes(recipes[i].appliance)) {
-			tabAppliances.push(recipes[i].appliance.replace(".", ""));
-		}
-
-		for (let k in recipes[i].ustensils) {
-			if (!tabIngredients.includes(recipes[i].ustensils[k])) {
-				tabUstensils.push(recipes[i].ustensils[k]);
-			}
-		}
-	}
-
-	const ingredientsModel = new List(tabIngredients.sort(), "$ingredients", "menuIngredients", "listIngredients", "btnIngredients", "ingredients-list-item", "ingredients-extendedwidth");
-	const appliancesModel = new List(tabAppliances.sort(), "$appliances", "menuAppliances", "listAppliances", "btnAppliances", "appliances-list-item", "appliances-extendedwidth");
-	const ustensilsModel = new List(tabUstensils.sort(), "$ustensils", "menuUstensils", "listUstensils", "btnUstensils", "ustensils-list-item", "ustensils-extendedwidth");
+	const ingredientsModel = new List(tabIngredients, "$ingredients", "menuIngredients", "listIngredients", "btnIngredients", "ingredients-list-item", "ingredients-extendedwidth");
+	const appliancesModel = new List(tabAppliances, "$appliances", "menuAppliances", "listAppliances", "btnAppliances", "appliances-list-item", "appliances-extendedwidth");
+	const ustensilsModel = new List(tabUstensils, "$ustensils", "menuUstensils", "listUstensils", "btnUstensils", "ustensils-list-item", "ustensils-extendedwidth");
 
 	return [ingredientsModel, appliancesModel, ustensilsModel];
 }
@@ -130,114 +100,85 @@ function createResources(recipes) {
 /**
  * Afficher toutes les recettes sur la page d'accueil
  *
- * @param {*} recipes la liste des recettes issues du json
+ * @param {*} recipes la liste des recettes à afficher
  */
 async function displayRecipes(recipes) {
 	const recipeDisplaySection = document.getElementById("recipes-display-section");
 	recipeDisplaySection.innerHTML = "";
 
 	recipes.forEach((recipe) => {
-		const recipeModel = new Recipe(recipe);
-		recipeDisplaySection.innerHTML += recipeModel.recipeCardDOM;
+		recipeDisplaySection.innerHTML += recipe.recipeCardDOM;
 	});
 }
 
 /**
- * Filtrer la liste des recettes avec les tags sélectionnés
- * Un élément Tag étant constitué de deux éléments: le nom du Tag et le type de Tag 
- *
- * @param {} listRecipes
- * @returns tagFilteredRecipes updated
+ * Créer la table des objets recette recipeObjects
+ * 
+ * @param {} recipes 
  */
-function tagFilterRecipes(listRecipes) {
-	let resultIndex = [];
-	const len = selectedTags._tableT.length;
+async function createRecipes(recipes) {
 
-	for (let i in listRecipes) { resultIndex[i]= false};
-
-	if (len > 0) {
-		for (let i in selectedTags._tableT) {
-			if (selectedTags._tableT[i][1] === "$appliances") {
-				for (let j in listRecipes) {
-					if (listRecipes[j].appliance.toLowerCase().includes(selectedTags._tableT[i][0].toLowerCase())) {
-						resultIndex[j] = true;
-					}
-				}
-				listRecipes = filterTab(listRecipes, resultIndex);
-				resultIndex = [];
-			}
-
-			if (selectedTags._tableT[i][1] === "$ustensils") {
-				for (let j in listRecipes) {
-					for (let k in listRecipes[j].ustensils) {
-						if (listRecipes[j].ustensils[k].toLowerCase().includes(selectedTags._tableT[i][0].toLowerCase())) {
-							resultIndex[j] = true;
-							break;
-						}
-					}
-				}
-				listRecipes = filterTab(listRecipes, resultIndex);
-				resultIndex = [];
-			}
-
-			if (selectedTags._tableT[i][1] === "$ingredients") {
-				for (let j in listRecipes) {
-					for (let k in listRecipes[j].ingredients) {
-							if ( listRecipes[j].ingredients[k].ingredient.toLowerCase() === selectedTags._tableT[i][0].toLowerCase() ) {
-								resultIndex[j] = true;
-								break;
-							}
-					}
-				}
-				listRecipes = filterTab(listRecipes, resultIndex);
-				resultIndex = [];
-			}
-		}
-		tagFilteredRecipes = listRecipes;
-		return;
-	}
-	tagFilteredRecipes = listRecipes;
+	recipes.forEach((recipe) => {
+		recipeObjects.push( new Recipe(recipe) );
+	});
 }
 
 /**
- *  Mettre à jour les recettes affichées
+ * Filtrer la liste des recettes sélectionnées à partir de la table des tags sélectionnés
+ * La variable filteredRecipes est mise à jour
+ *
+ */
+function tagFilter() {
+	const len = selectedTags._tableT.length;
+
+	if (len > 0) {
+		selectedTags._tableT.forEach((item) => {
+			if (item[1] === "$appliances") {
+				filteredRecipes = filteredRecipes.filter((recipe) => recipe.applianceSearch(item[0]));
+			}
+
+			if (item[1] === "$ustensils") {
+				filteredRecipes = filteredRecipes.filter((recipe) => {
+					return recipe.ustensilsSearch(item[0]);
+				});
+			}
+
+			if (item[1] === "$ingredients") {
+				filteredRecipes = filteredRecipes.filter((recipe) => {
+					return recipe.ingredientsSearch(item[0]);
+				});
+			}
+		});
+
+	}
+}
+
+/**
+ * 	Fonction principale de mise à jour de la page
+ *  	Mettre à jour les recettes sélectionnées suite à changement de valeur de l'input
+ *  	Mettre à jour les recettes sélectionnées suite à ajout ou suppression de tag
+ * 		Mettre à jour les recettes affichées
+ * 		Mettre à jour la listes associées aux boutons ingrédients, appliances et ustensils
+ * 		Si rien à afficher, message
  */
 export function updateRecipes() {
-
-	console.log("updateRecipes");
 	let filterIndex = 0;
-	filteredRecipes = allRecipes;
-	tagFilteredRecipes = allRecipes;
+	filteredRecipes = recipeObjects;
 
-	// Si au moins 3 caractères recherche générale dans le nom, la description et les ingrédients de chaque recette
 	if (inputString.length >= 3) {
-
 		filteredRecipes = [];
-		for (let i in allRecipes) {
-			if (allRecipes[i].name.toLowerCase().includes(inputString.toLowerCase()) ||
-				allRecipes[i].description.toLowerCase().includes(inputString.toLowerCase()) ||
-					(() => { for (let j in allRecipes[i].ingredients) {
-							if ( allRecipes[i].ingredients[j].ingredient.toLowerCase().includes(inputString.toLowerCase()) ) {
-								return true;
-							}
-						}
-						return false;
-					})())	{
-						filteredRecipes[filterIndex++] = allRecipes[i];
-					}
+		for (let i in recipeObjects) {
+			if (recipeObjects[i].mainSearch(inputString)) {
+				filteredRecipes[filterIndex++] = recipeObjects[i];
+			}
 		}
 	}
 
-	// Filtrage des recettes suivant les tags sélectionnés
-	tagFilterRecipes(filteredRecipes);
+	tagFilter();
+	displayRecipes(filteredRecipes);
+	updateLists();
 
-	// Affichage des recettes sélectionnées
-	displayRecipes(tagFilteredRecipes);
-
-	// Mise à jour des listes d'ingredients, appliances et ustensiles
-	updateLists(tagFilteredRecipes);
-
-	if (tagFilteredRecipes.length === 0) {
+	if (filteredRecipes.length === 0) {
 		document.getElementById("recipes-display-section").innerHTML = `<p id="noRecipes">
 				Aucune recette ne correspond à votre critère ...vous pouvez, par exemple, rechercher 'tarte aux pommes', 'poisson', etc. 
 			 </p>`;
@@ -257,24 +198,25 @@ async function activateSearch() {
 	elementMenu.addEventListener("keyup", (e) => {
 		e.preventDefault();
 		inputString = e.target.value.toLowerCase();
-			updateRecipes();
+		updateRecipes();
 	});
 }
 
 /**
- * Initialisation de la page d'accueil
+ * Initialisation de la page d'accueil 
  */
 async function init() {
 	/* Extraire les recettes du JSON et initialiser le tableau des 50 recettes */
 	const { recipes } = await getRecipes();
-	allRecipes = [...recipes];
+	const allRecipes = [...recipes];
 
-	/* Afficher les recettes et activer le listener sur l'input */
-	displayRecipes(allRecipes);
+	/* Construire la table des objets recette, afficher toutes les recettes et activer les écouteurs */
+	createRecipes(allRecipes);
+	displayRecipes(recipeObjects);
 	activateSearch();
 
 	/* Construire les listes d'ingrédients, d'appareils et d'ustensiles à partir des recettes, et active les écouteurs */
-	[ingredientsList, appliancesList, ustensilsList] = createResources(allRecipes);
+	[ingredientsList, appliancesList, ustensilsList] = createLists(allRecipes);
 	activateLists();
 
 	/* Initialiser la table des tags */

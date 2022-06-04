@@ -1,5 +1,5 @@
 // Déclaration
-import { selectedTags, updateRecipes } from "../pages/index.js";
+import { selectedTags } from "../pages/index.js";
 import { closeAllLists } from "../pages/index.js";
 import { clearString } from "../utils/string.js";
 
@@ -15,7 +15,7 @@ import { clearString } from "../utils/string.js";
  * @property (string) itemClass - la classe de l'element i
  * @property (string) widthClass - la largeur spécifique de la liste
  * @property (array) actives - tableau des éléments de la liste sélectionnés suite à l'entrée d'une expression dans l'input
- * 
+ *
  * */
 
 export class List {
@@ -38,30 +38,27 @@ export class List {
 		/* Sur keyup, si plus de 2 caractères, on recherche les items sélectionnables */
 		elementMenu.addEventListener("keyup", (e) => {
 			e.preventDefault();
-			e.stopImmediatePropagation();
 			this._input = e.target.value.toLowerCase();
+			this._actives = this._elements;
 			if (this._input.length > 2) {
 				this._actives = this._actives.filter((elt) => elt.toLowerCase().includes(this._input.toLowerCase()));
 				this.activateInputList();
-			} else {
-				this._actives = this._elements;
 			}
 		});
-
 	}
 
 	/**
 	 *  Affichage de la liste des éléments ingrédients, appliances ou ustensiles
 	 *  On omet les tags créés de la liste
-	 * 
+	 *
 	 * @returns string fait des éléments <i> trouvés
 	 */
 	displayListDOM() {
 		let itemsListString = "";
 
-		for (let i = 0; i < this._elements.length; i++) {
-			if (!selectedTags.existsTag(this._elements[i])) {
-				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${this._elements[i]}" data-type="${this._dataType}">${this._elements[i]}</i>`;
+		for (const element of this._elements) {
+			if (!selectedTags.existsTag(element)) {
+				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${element}" data-type="${this._dataType}">${element}</i>`;
 			}
 		}
 
@@ -72,9 +69,9 @@ export class List {
 	displayInputListDOM() {
 		let itemsListString = "";
 
-		for (let i = 0; i < this._actives.length; i++) {
-			if (!selectedTags.existsTag(this._actives[i])) {
-				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${this._actives[i]}" data-type="${this._dataType}">${this._actives[i]}</i>`;
+		for (const element of this._actives) {
+			if (!selectedTags.existsTag(element)) {
+				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${element}" data-type="${this._dataType}">${element}</i>`;
 			}
 		}
 
@@ -83,7 +80,7 @@ export class List {
 
 	/**
 	 * Affichage ou fermeture de la liste des éléments visés (ingrédients, appareils ou ustensiles)
-	 *  
+	 *
 	 */
 	activateList() {
 		const elementMenu = document.getElementById(this._menuId);
@@ -95,7 +92,7 @@ export class List {
 			elementBtn.childNodes[1].style.transform = "rotate(0deg)";
 			elementUl.classList.remove("items-display", "inputList");
 			return;
-		};
+		}
 
 		closeAllLists();
 		elementMenu.classList.add(this._widthClass);
@@ -103,7 +100,6 @@ export class List {
 		elementUl.classList.add("items-display");
 		elementUl.innerHTML = this.displayListDOM();
 		this.activateListItems();
-
 	}
 
 	/**
@@ -140,30 +136,30 @@ export class List {
 
 	/**
 	 * Supprimer un élément de la liste suite à sa sélection en tag
-	 * @param {*} itemName 
+	 * @param {*} itemName
 	 */
 	removeListItem(itemName) {
 		const myIndex = this._elements.indexOf(itemName);
 		if (myIndex !== -1) {
-    	this._elements.splice(myIndex, 1);
+			this._elements.splice(myIndex, 1);
 		}
 	}
 
 	/**
 	 * Ajouter un élément de la liste suite à une suppression de tag
-	 * @param {*} itemName 
+	 * @param {*} itemName
 	 */
 	addListItem(itemName) {
 		const myIndex = this._elements.indexOf(itemName);
 		if (myIndex === -1) {
-	   	this._elements.push(itemName);
+			this._elements.push(itemName);
 			this._elements.sort();
-		} 
+		}
 	}
 
 	/**
 	 * Mise à jour de la liste suite à une liste de recettes modifiée
-	 * @param {*} tabList 
+	 * @param {*} tabList
 	 */
 	updateList(tabList) {
 		this._elements = tabList;
@@ -178,7 +174,7 @@ export class List {
 		document.getElementById(this._listId).classList.remove("items-display", "inputList");
 		document.getElementById(this._menuId).classList.remove(this._widthClass, "input-extendedwidth");
 		document.getElementById(this._btnId).childNodes[1].style.transform = "rotate(0deg)";
-		document.getElementById(this._dataType).value = "";		
+		document.getElementById(this._dataType).value = "";
 		this._actives = this._elements;
 		this._input = "";
 	}

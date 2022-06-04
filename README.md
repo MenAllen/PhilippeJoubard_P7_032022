@@ -27,4 +27,5 @@ Comparaison des deux solutions avec l'outil JSben.ch
  - Livraison 6 : Ajout input ingredients, appliances, ustensils
  - Livraison 7 : Corrections scroll, format input ing, appli & ustensils
  - Livraison 8 : Ajout commentaires, thin scrollbar et fix fiche investigation
- - Livraison 9 : AJout Algo2 avec boucles for
+ - Livraison 9 : Ajout Algo2 avec boucles for
+ - Livraison 10: Ajout linter & gitignore
