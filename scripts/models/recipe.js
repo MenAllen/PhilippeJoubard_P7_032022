@@ -29,18 +29,15 @@ export class Recipe {
 	 * @memberof Recipe
 	 */
 	get ingredients() {
-		let listeIngredients = ``;
-
-		listeIngredients = this._ingredients
-			.map((element) => {
-				return `			
+		
+		return this._ingredients
+		.map((element) => {
+			return `			
 			<strong>${element.ingredient}</strong>
 			${ "quantity" in element ? `: ${element.quantity}` : ""}
 			${ "unit" in element ? (element.unit === "grammes" ? "g" : element.unit) : "" }<br>`;
-			})
-			.join("");
-		
-		return listeIngredients;
+		})
+		.join("");
 	}
 
 	/**

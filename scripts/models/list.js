@@ -57,9 +57,9 @@ export class List {
 	displayListDOM() {
 		let itemsListString = "";
 
-		for (let i = 0; i < this._elements.length; i++) {
-			if (!selectedTags.existsTag(this._elements[i])) {
-				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${this._elements[i]}" data-type="${this._dataType}">${this._elements[i]}</i>`;
+		for (const element of this._elements) {
+			if (!selectedTags.existsTag(element)) {
+				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${element}" data-type="${this._dataType}">${element}</i>`;
 			}
 		}
 
@@ -70,9 +70,9 @@ export class List {
 	displayInputListDOM() {
 		let itemsListString = "";
 
-		for (let i = 0; i < this._actives.length; i++) {
-			if (!selectedTags.existsTag(this._actives[i])) {
-				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${this._actives[i]}" data-type="${this._dataType}">${this._actives[i]}</i>`;
+		for (const element of this._actives) {
+			if (!selectedTags.existsTag(element)) {
+				itemsListString += `<i id="btnClose" class="${this._itemClass} font-Lato18 text-white" data-name="${element}" data-type="${this._dataType}">${element}</i>`;
 			}
 		}
 

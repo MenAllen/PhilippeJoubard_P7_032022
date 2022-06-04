@@ -86,7 +86,7 @@ export class TagsArray {
 			// insérer un nouvel élément
 			this._tableT.push([name, type]);
 
-			let color = this.getTagcolor(type);
+			const color = this.getTagcolor(type);
 
 			// Construire le nouvel élément <li> enfant de <ul>
 			const ulNode = document.getElementById("listTags");

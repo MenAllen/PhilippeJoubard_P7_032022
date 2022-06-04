@@ -47,7 +47,6 @@ function activateLists() {
 			}
 			closeAllLists();
 		}
-		e.stopImmediatePropagation();
 	});
 }
 
