@@ -6,12 +6,12 @@
  */
 export function clearString(stringArray) {
 	// Variables de travail
-	let workingArray = [];
+	const workingArray = [];
 	let uniqueworkingArray = [];
 	let str = "";
 
 	// Déclarer le Tableau des exceptions et le tableau des corrections
-	let tabExceptions = ["Bananes", "Huile d'olives", "Kiwis", "Pommes"];
+	const tabExceptions = ["Bananes", "Huile d'olives", "Kiwis", "Pommes"];
 	const tabCorrections = [
 		["casserolle", "casserole"],
 		["Casserolle", "Casserole"],
@@ -58,21 +58,18 @@ export function clearString(stringArray) {
 }
 
 /**
- * la fonction filterTab réalise un filtrage sur le tableau de recettes reçu
- * Un tableau de booleens de même longueur lui indique si chacn des éléments doit
- * être filtré ou non
- *
- * @param {*} inputTab le tableau à filtrer
- * @param {*} indexTab la table des index à true ou false
- * @returns tableau filtré
+ * La fonction itemPresent vérifie la présence dans un tableau d'un item donné
+ * 
+ * @param {*} inputTab 
+ * @param {*} item 
+ * @returns itemExists boolean
  */
-export function filterTab(inputTab, indexTab) {
-	let resultTab = [];
+export function itemPresent(inputTab, item) {
+	let itemExists = false;
 
-	for (let i in indexTab) {
-		if (indexTab[i]) {
-			resultTab.push(inputTab[i]);
-		}
+	for (let i in inputTab) {
+		itemExists ||= inputTab[i] === item;
 	}
-	return resultTab;
+	return itemExists;	
 }
+

@@ -29,3 +29,4 @@ Comparaison des deux solutions avec l'outil JSben.ch
  - Livraison 8 : Ajout commentaires, thin scrollbar et fix fiche investigation
  - Livraison 9 : Ajout Algo2 avec boucles for
  - Livraison 10: Ajout linter & gitignore
+ - Livraison 11: Suppression filterTab
