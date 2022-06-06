@@ -6,7 +6,7 @@
  */
 export function clearString(stringArray) {
 	// Variables de travail
-	let workingArray = [];
+	const workingArray = [];
 	let uniqueworkingArray = [];
 	let str = "";
 
