@@ -162,9 +162,8 @@ export class List {
 	 * @param {*} tabList
 	 */
 	updateList(tabList) {
-		this._elements = tabList;
 		// Nettoyage de la liste des ingredients: accents et fautes d'orthographe
-		this._elements = clearString(this._elements);
+		this._elements = clearString(tabList);
 	}
 
 	/**

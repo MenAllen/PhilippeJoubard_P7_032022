@@ -35,19 +35,17 @@ export function clearString(stringArray) {
 	// Enlever les "s" pour éviter les doublons
 	for (let i = 0; i < stringArray.length; i++) {
 		workingArray[i] = stringArray[i];
-		if (workingArray[i].endsWith("s")) {
-			if (tabExceptions.indexOf(workingArray[i]) !== -1) {
-				str = workingArray[i].slice(0, -1);
-				workingArray[i] = str;
-			}
+		if (workingArray[i].endsWith("s") && tabExceptions.includes(workingArray[i])) {
+			str = workingArray[i].slice(0, -1);
+			workingArray[i] = str;
 		}
 	}
 
 	// Corriger certains cas où des fautes d'orthographe génèrent des doublons
 	for (let i = 0; i < workingArray.length; i++) {
-		for (let j = 0; j < tabCorrections.length; j++) {
-			if (workingArray[i] === tabCorrections[j][0]) {
-				workingArray[i] = tabCorrections[j][1];
+		for (const tabCorrection of tabCorrections) {
+			if (workingArray[i] === tabCorrection[0]) {
+				workingArray[i] = tabCorrection[1];
 			}
 		}
 	}
