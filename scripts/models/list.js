@@ -32,18 +32,31 @@ export class List {
 		// Nettoyage de la liste des ingredients: accents et fautes d'orthographe
 		this._elements = clearString(this._elements);
 		this._actives = this._elements;
-
-		const elementMenu = document.getElementById(this._menuId);
+		
+		// Initialisations complémentaires pour les placeholder
+		this._firstPlaceholder = document.getElementById(this._dataType).getAttribute("placeholder");
+		switch(this._dataType) {
+			case "$ingredients":
+				this._secondPlaceholder = "Rechercher un ingrédient";
+				break;
+			case "$ustensils":
+				this._secondPlaceholder = "Rechercher un ustensile";
+				break;
+			case "$appliances":
+				this._secondPlaceholder = "Rechercher un appareil";
+				break;
+			default:
+				console.log("Placeholder: erreur type");
+		}
 
 		/* Sur keyup, si plus de 2 caractères, on recherche les items sélectionnables */
+		const elementMenu = document.getElementById(this._menuId);
 		elementMenu.addEventListener("keyup", (e) => {
 			e.preventDefault();
 			this._input = e.target.value.toLowerCase();
 			this._actives = this._elements;
-			if (this._input.length > 2) {
-				this._actives = this._actives.filter((elt) => elt.toLowerCase().includes(this._input.toLowerCase()));
-				this.activateInputList();
-			}
+			this._actives = this._input.length > 2 ? this._actives.filter((elt) => elt.toLowerCase().includes(this._input.toLowerCase())) : [];
+			this.activateInputList();
 		});
 
 	}
@@ -87,11 +100,16 @@ export class List {
 		const elementMenu = document.getElementById(this._menuId);
 		const elementBtn = document.getElementById(this._btnId);
 		const elementUl = document.getElementById(this._listId);
+		const elementInput = document.getElementById(this._dataType);
+
+		console.log("Input:", elementInput);
 
 		if (elementUl.classList.contains("items-display")) {
 			elementMenu.classList.remove(this._widthClass, "input-extendedwidth");
 			elementBtn.childNodes[1].style.transform = "rotate(0deg)";
 			elementUl.classList.remove("items-display", "inputList");
+			elementInput.setAttribute("placeholder", this._firstPlaceholder );
+			elementInput.classList.remove("change");
 			return;
 		}
 
@@ -100,6 +118,8 @@ export class List {
 		elementBtn.childNodes[1].style.transform = "rotate(180deg)";
 		elementUl.classList.add("items-display");
 		elementUl.innerHTML = this.displayListDOM();
+		elementInput.setAttribute("placeholder", this._secondPlaceholder);
+		elementInput.classList.add("change");
 		this.activateListItems();
 
 	}
@@ -175,7 +195,10 @@ export class List {
 		document.getElementById(this._listId).classList.remove("items-display", "inputList");
 		document.getElementById(this._menuId).classList.remove(this._widthClass, "input-extendedwidth");
 		document.getElementById(this._btnId).childNodes[1].style.transform = "rotate(0deg)";
-		document.getElementById(this._dataType).value = "";		
+		document.getElementById(this._dataType).value = "";
+		document.getElementById(this._dataType).setAttribute("placeholder", this._firstPlaceholder );
+		document.getElementById(this._dataType).classList.remove("change");
+
 		this._actives = this._elements;
 		this._input = "";
 	}

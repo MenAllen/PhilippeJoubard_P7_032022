@@ -1,5 +1,6 @@
 // Déclaration
 import { ingredientsList, appliancesList, ustensilsList, updateRecipes } from "../pages/index.js";
+import { closeAllLists } from "../pages/index.js";
 
 /**
  * Classe TagsArray
@@ -78,6 +79,7 @@ export class TagsArray {
 			}
 			updateRecipes();
 		}
+		closeAllLists();
 	}
 
 	// Ajouter un Tag
@@ -97,8 +99,8 @@ export class TagsArray {
         </li>
       `;
 
-			const tabclose = document.querySelectorAll("#closetag");
 			// Configurer le listener sur tous les éléments <li>
+			const tabclose = document.querySelectorAll("#closetag");			
 			tabclose.forEach((li) => {
 				li.addEventListener("click", (e) => {
 					e.preventDefault();

@@ -53,7 +53,7 @@ function activateLists() {
 /**
  * Fonction de Mise à jour des 3 listes à partir de la liste de recettes filteredRecipes
  * à partir de la table filteredRecipes des objets recette
- * Set permet d'ignorer les doublons
+ * 
  */
 function updateLists() {
 
@@ -70,6 +70,7 @@ function updateLists() {
 	ingredientsList.updateList(tabIngredients);
 	appliancesList.updateList(tabAppliances);
 	ustensilsList.updateList(tabUstensils);
+
 }
 
 /**
@@ -134,7 +135,8 @@ function tagFilter() {
 	if (len > 0) {
 		selectedTags._tableT.forEach((item) => {
 			if (item[1] === "$appliances") {
-				filteredRecipes = filteredRecipes.filter((recipe) => recipe.applianceSearch(item[0]));
+				filteredRecipes = filteredRecipes.filter((recipe) => {
+					return recipe.applianceSearch(item[0])});
 			}
 
 			if (item[1] === "$ustensils") {

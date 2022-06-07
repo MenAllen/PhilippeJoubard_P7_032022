@@ -57,6 +57,10 @@
 	font-weight: 700;
 }
 
+.Op {
+	opacity: 0.5;
+}
+
 .header-titre {
 	color: #d04f4f;
 	font-size: 36px;
@@ -140,6 +144,10 @@ footer p {
 	font-weight: 700;
 }
 
+.input-Filters.change::placeholder {
+	opacity: 0.5;
+}
+
 .btn-Filters {
 	position: absolute;
 	right: 1.5rem;
@@ -187,7 +195,7 @@ footer p {
   z-index: 10;
 	max-height: 360px;
 	overflow-y: scroll;
-	scrollbar-width: thin;
+	scrollbar-width: none;
 }
 
 .inputList {
@@ -211,6 +219,9 @@ footer p {
   top: 75%;
   width: 603px;
   z-index: 10;
+	max-height: 360px;
+	overflow-y: scroll;
+	scrollbar-width: none;
 }
 
  .listUstensils {
@@ -224,6 +235,9 @@ footer p {
   top: 75%;
   width: 714px;
   z-index: 10;
+	max-height: 360px;
+	overflow-y: scroll;
+	scrollbar-width: none;
 }
 
 .items-display {

@@ -29,3 +29,4 @@ Comparaison des deux solutions avec l'outil JSben.ch
  - Livraison 8 : Ajout commentaires, thin scrollbar et fix fiche investigation
  - Livraison 9 : Modification de la fonction displayRecipes
  - Livraison 10: Ajout gitignore
+ - Livraison 11: Ajout modif placeholder sur 3 boutons
