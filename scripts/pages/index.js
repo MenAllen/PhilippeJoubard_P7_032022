@@ -184,32 +184,8 @@ function tagFilter() {
 				filteredRecipes = filterTab(filteredRecipes, resultIndex);
 				resultIndex = [];
 			}
-			console.log("boucle", filteredRecipes, resultIndex);
 		}
 	}
-
-	console.log("sortie", filteredRecipes);
-
-
-/*	if (len > 0) {
-		selectedTags._tableT.forEach((item) => {
-			if (item[1] === "$appliances") {
-				filteredRecipes = filteredRecipes.filter((recipe) => recipe.applianceSearch(item[0]));
-			}
-
-			if (item[1] === "$ustensils") {
-				filteredRecipes = filteredRecipes.filter((recipe) => {
-					return recipe.ustensilsSearch(item[0]);
-				});
-			}
-
-			if (item[1] === "$ingredients") {
-				filteredRecipes = filteredRecipes.filter((recipe) => {
-					return recipe.ingredientsSearch(item[0]);
-				});
-			}
-		});
-	} */
 }
 
 /**

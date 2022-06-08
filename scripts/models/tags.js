@@ -75,7 +75,6 @@ export class TagsArray {
 					appliancesList.addListItem(name);
 					break;
 				default:
-					console.log("Tags: erreur type");
 			}
 			updateRecipes();
 		}
