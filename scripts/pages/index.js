@@ -3,11 +3,11 @@ import { getRecipes } from "../utils/APIfetch.js";
 import { Recipe } from "../models/recipe.js";
 import { List } from "../models/list.js";
 import { TagsArray } from "../models/tags.js";
-import { itemPresent } from "../utils/string.js";
+import { filterTab, itemPresent } from "../utils/string.js";
 
 // Tableaux de travail
 const recipeObjects = []; // Tableau des objets recettes
-let filteredRecipes = []; // Tableau des objets recettes filtrées par l'expression d'entrée et/ou les tags
+export let filteredRecipes = []; // Tableau des objets recettes filtrées par l'expression d'entrée et/ou les tags
 let inputString = ""; // Input de la recherche générale
 export let selectedTags; // Tableau des tags sélectionnés
 
@@ -148,8 +148,50 @@ async function createRecipes(recipes) {
  */
 function tagFilter() {
 	const len = selectedTags._tableT.length;
+	let resultIndex = [];
 
 	if (len > 0) {
+		for (let i in selectedTags._tableT) {
+
+			for (let a in filteredRecipes) { resultIndex[a]= false}
+			
+			if (selectedTags._tableT[i][1] === "$appliances") {
+				for (let j in filteredRecipes) {
+					if (filteredRecipes[j].applianceSearch(selectedTags._tableT[i][0])) {
+						resultIndex[j] = true;
+					}
+				}
+				filteredRecipes = filterTab(filteredRecipes, resultIndex);
+				resultIndex = [];
+			}
+
+			if (selectedTags._tableT[i][1] === "$ustensils") {
+				for (let k in filteredRecipes) {
+					if (filteredRecipes[k].ustensilsSearch(selectedTags._tableT[i][0])) {
+						resultIndex[k] = true;
+					}
+				}
+				filteredRecipes = filterTab(filteredRecipes, resultIndex);
+				resultIndex = [];
+			}
+
+			if (selectedTags._tableT[i][1] === "$ingredients") {
+				for (let l in filteredRecipes) {
+					if (filteredRecipes[l].ingredientsSearch(selectedTags._tableT[i][0])) {
+						resultIndex[l] = true;
+					}
+				}
+				filteredRecipes = filterTab(filteredRecipes, resultIndex);
+				resultIndex = [];
+			}
+			console.log("boucle", filteredRecipes, resultIndex);
+		}
+	}
+
+	console.log("sortie", filteredRecipes);
+
+
+/*	if (len > 0) {
 		selectedTags._tableT.forEach((item) => {
 			if (item[1] === "$appliances") {
 				filteredRecipes = filteredRecipes.filter((recipe) => recipe.applianceSearch(item[0]));
@@ -167,7 +209,7 @@ function tagFilter() {
 				});
 			}
 		});
-	}
+	} */
 }
 
 /**

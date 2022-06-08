@@ -1,3 +1,6 @@
+// Déclaration
+import { clearString } from "../utils/string.js";
+
 /**
  * Classe Recipe
  *
@@ -19,6 +22,13 @@ export class Recipe {
 		this._description = data.description;
 		this._appliance = data.appliance;
 		this._ustensils = data.ustensils;
+
+		// Nettoyage de la liste des ingredients, ustensils et de l'appliance: accents, 's' et fautes d'orthographe
+		[this._appliance] = clearString([this._appliance]);
+		this._ustensils = clearString(this._ustensils);
+		for (let elt of this._ingredients) {
+			[elt.ingredient] = clearString([elt.ingredient]);
+		}
 	}
 
 	/**
@@ -83,12 +93,12 @@ export class Recipe {
 
 	// Tester la présence d'une expression dans l'appareil utilisé pour la recette
 	applianceSearch(paramString) {
-		return this._appliance.toLowerCase().includes(paramString.toLowerCase());
+		return this._appliance.toLowerCase() === paramString.toLowerCase();
 	}
 
 	// Tester la présence d'une expression dans les ustensiles de la recette
 	ustensilsSearch(paramString) {
-		return this._ustensils.find((elt) => elt.toLowerCase().includes(paramString.toLowerCase()));
+		return this._ustensils.find((elt) => elt.toLowerCase() === paramString.toLowerCase());
 	}
 
 	// Tester la présence d'une expression dans les ingrédienst de la recette

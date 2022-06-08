@@ -13,8 +13,9 @@ export function clearString(stringArray) {
 	// Déclarer le Tableau des exceptions et le tableau des corrections
 	const tabExceptions = ["Bananes", "Huile d'olives", "Kiwis", "Pommes"];
 	const tabCorrections = [
-		["casserolle", "casserole"],
+		["casserolle", "Casserole"],
 		["Casserolle", "Casserole"],
+		["Casserolle.", "Casserole"],
 		["Crème Fraiche", "Crème fraîche"],
 		["Crème fraiche", "Crème fraîche"],
 		["Crème Fraîche", "Crème fraîche"],
@@ -30,6 +31,8 @@ export function clearString(stringArray) {
 		["huile d'olive", "Huile d'olive"],
 		["huile d'olives", "Huile d'olive"],
 		["gruyère râpé", "Gruyère râpé"],
+		["Petits poids", "Petits pois"],
+		["Poudre d'amendes", "Poudre d'amandes"],
 	];
 
 	// Enlever les "s" pour éviter les doublons
@@ -56,10 +59,29 @@ export function clearString(stringArray) {
 }
 
 /**
+ * la fonction filterTab réalise un filtrage sur le tableau de recettes reçu
+ * Un tableau de booleens de même longueur lui indique si chacn des éléments doit
+ * être filtré ou non
+ *
+ * @param {*} indexTab la table des index à true ou false
+ * @returns tableau filteredRecipes filtré
+ */
+export function filterTab(inputTab, indexTab) {
+	const resultTab = [];
+
+	for (let i in indexTab) {
+		if (indexTab[i]) {
+			resultTab.push(inputTab[i]);
+		}
+	}
+	return resultTab;
+}
+
+/**
  * La fonction itemPresent vérifie la présence dans un tableau d'un item donné
- * 
- * @param {*} inputTab 
- * @param {*} item 
+ *
+ * @param {*} inputTab
+ * @param {*} item
  * @returns itemExists boolean
  */
 export function itemPresent(inputTab, item) {
@@ -68,6 +90,5 @@ export function itemPresent(inputTab, item) {
 	for (let i in inputTab) {
 		itemExists ||= inputTab[i] === item;
 	}
-	return itemExists;	
+	return itemExists;
 }
-

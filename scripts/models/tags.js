@@ -1,5 +1,6 @@
 // Déclaration
 import { ingredientsList, appliancesList, ustensilsList, updateRecipes } from "../pages/index.js";
+import { closeAllLists } from "../pages/index.js";
 
 /**
  * Classe TagsArray
@@ -53,7 +54,7 @@ export class TagsArray {
 
 		// Chercher l'index
 		let index = -1;
-		for (let i =0; i < this._tableT.length; i++) {
+		for (let i = 0; i < this._tableT.length; i++) {
 			if (this._tableT[i][0] === name) {
 				index = i;
 			}
@@ -78,6 +79,7 @@ export class TagsArray {
 			}
 			updateRecipes();
 		}
+		closeAllLists();
 	}
 
 	// Ajouter un Tag
