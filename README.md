@@ -7,7 +7,7 @@ Il sera réalisé deux versions de cet algorithme, l'une basée sur une recherch
 La page github: https://menallen.github.io/PhilippeJoubard_P7_032022/index.html permet d'afficher la branche main ou la branche algo2 suivant le choix
 
 ## Installation
-cloner le repo github, en chosisissant la version main (recherche fonctionnelle) ou algo2(recherche for), puis
+cloner le repo github, en choisissant la version main (recherche fonctionnelle) ou algo2 (recherche for), puis
  - npm install,
  - npm run lint pour linter
  - Lancer le serveur local (Go live sous VS code)
