@@ -75,7 +75,6 @@ export class TagsArray {
 					appliancesList.addListItem(name);
 					break;
 				default:
-					console.log("Tags: erreur type");
 			}
 			updateRecipes();
 		}
@@ -100,7 +99,7 @@ export class TagsArray {
       `;
 
 			// Configurer le listener sur tous les éléments <li>
-			const tabclose = document.querySelectorAll("#closetag");			
+			const tabclose = document.querySelectorAll("#closetag");
 			tabclose.forEach((li) => {
 				li.addEventListener("click", (e) => {
 					e.preventDefault();

@@ -5,10 +5,10 @@ import { List } from "../models/list.js";
 import { TagsArray } from "../models/tags.js";
 
 // Tableaux de travail
-const recipeObjects = []; 			// Tableau des objets recettes
-let filteredRecipes = []; 			// Tableau des objets recettes filtrées par l'expression d'entrée et/ou les tags
-let inputString = ""; 					// Input de la recherche générale
-export let selectedTags; 				// Tableau des tags sélectionnés
+const recipeObjects = []; // Tableau des objets recettes
+let filteredRecipes = []; // Tableau des objets recettes filtrées par l'expression d'entrée et/ou les tags
+let inputString = ""; // Input de la recherche générale
+export let selectedTags; // Tableau des tags sélectionnés
 
 // Listes des ingredients, appareils et ustensiles
 export let ingredientsList;
@@ -53,10 +53,9 @@ function activateLists() {
 /**
  * Fonction de Mise à jour des 3 listes à partir de la liste de recettes filteredRecipes
  * à partir de la table filteredRecipes des objets recette
- * 
+ *
  */
 function updateLists() {
-
 	let tabIngredients = [];
 	let tabAppliances = [];
 	let tabUstensils = [];
@@ -70,7 +69,6 @@ function updateLists() {
 	ingredientsList.updateList(tabIngredients);
 	appliancesList.updateList(tabAppliances);
 	ustensilsList.updateList(tabUstensils);
-
 }
 
 /**
@@ -114,13 +112,12 @@ async function displayRecipes(recipes) {
 
 /**
  * Créer la table des objets recette recipeObjects
- * 
- * @param {} recipes 
+ *
+ * @param {} recipes
  */
 async function createRecipes(recipes) {
-
 	recipes.forEach((recipe) => {
-		recipeObjects.push( new Recipe(recipe) );
+		recipeObjects.push(new Recipe(recipe));
 	});
 }
 
@@ -136,7 +133,8 @@ function tagFilter() {
 		selectedTags._tableT.forEach((item) => {
 			if (item[1] === "$appliances") {
 				filteredRecipes = filteredRecipes.filter((recipe) => {
-					return recipe.applianceSearch(item[0])});
+					return recipe.applianceSearch(item[0]);
+				});
 			}
 
 			if (item[1] === "$ustensils") {
@@ -151,7 +149,6 @@ function tagFilter() {
 				});
 			}
 		});
-
 	}
 }
 
@@ -164,11 +161,10 @@ function tagFilter() {
  * 		Si rien à afficher, message
  */
 export function updateRecipes() {
-
 	filteredRecipes = recipeObjects;
 
 	if (inputString.length >= 3) {
-		filteredRecipes = recipeObjects.filter((recipe) => recipe.mainSearch(inputString))
+		filteredRecipes = recipeObjects.filter((recipe) => recipe.mainSearch(inputString));
 	}
 
 	tagFilter();
@@ -187,7 +183,6 @@ export function updateRecipes() {
  *
  */
 async function activateSearch() {
-
 	/* Initialisation du champ Input */
 	const elementMenu = document.getElementById("menuPrincipal");
 	elementMenu.value = "";
@@ -200,7 +195,7 @@ async function activateSearch() {
 }
 
 /**
- * Initialisation de la page d'accueil 
+ * Initialisation de la page d'accueil
  */
 async function init() {
 	/* Extraire les recettes du JSON et initialiser le tableau des 50 recettes */

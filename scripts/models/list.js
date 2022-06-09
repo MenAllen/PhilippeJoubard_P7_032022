@@ -15,7 +15,9 @@ import { clearString } from "../utils/string.js";
  * @property (string) itemClass - la classe de l'element i
  * @property (string) widthClass - la largeur spécifique de la liste
  * @property (array) actives - tableau des éléments de la liste sélectionnés suite à l'entrée d'une expression dans l'input
- * 
+ * @property (string) firstPlaceholder - valeur initiale du placeholder de l'input de list
+ * @property (string) secondPlaceholder - valeur de remplacement du placeholder de l'input de list
+ *
  * */
 
 export class List {
@@ -32,10 +34,10 @@ export class List {
 		// Nettoyage de la liste des ingredients: accents et fautes d'orthographe
 		this._elements = clearString(this._elements);
 		this._actives = this._elements;
-		
+
 		// Initialisations complémentaires pour les placeholder
 		this._firstPlaceholder = document.getElementById(this._dataType).getAttribute("placeholder");
-		switch(this._dataType) {
+		switch (this._dataType) {
 			case "$ingredients":
 				this._secondPlaceholder = "Rechercher un ingrédient";
 				break;
@@ -46,7 +48,7 @@ export class List {
 				this._secondPlaceholder = "Rechercher un appareil";
 				break;
 			default:
-				console.log("Placeholder: erreur type");
+				this._secondPlaceholder = "";
 		}
 
 		/* Sur keyup, si plus de 2 caractères, on recherche les items sélectionnables */
@@ -58,13 +60,12 @@ export class List {
 			this._actives = this._input.length > 2 ? this._actives.filter((elt) => elt.toLowerCase().includes(this._input.toLowerCase())) : [];
 			this.activateInputList();
 		});
-
 	}
 
 	/**
 	 *  Affichage de la liste des éléments ingrédients, appliances ou ustensiles
 	 *  On omet les tags créés de la liste
-	 * 
+	 *
 	 * @returns string fait des éléments <i> trouvés
 	 */
 	displayListDOM() {
@@ -94,7 +95,7 @@ export class List {
 
 	/**
 	 * Affichage ou fermeture de la liste des éléments visés (ingrédients, appareils ou ustensiles)
-	 *  
+	 *
 	 */
 	activateList() {
 		const elementMenu = document.getElementById(this._menuId);
@@ -102,13 +103,11 @@ export class List {
 		const elementUl = document.getElementById(this._listId);
 		const elementInput = document.getElementById(this._dataType);
 
-		console.log("Input:", elementInput);
-
 		if (elementUl.classList.contains("items-display")) {
 			elementMenu.classList.remove(this._widthClass, "input-extendedwidth");
 			elementBtn.childNodes[1].style.transform = "rotate(0deg)";
 			elementUl.classList.remove("items-display", "inputList");
-			elementInput.setAttribute("placeholder", this._firstPlaceholder );
+			elementInput.setAttribute("placeholder", this._firstPlaceholder);
 			elementInput.classList.remove("change");
 			return;
 		}
@@ -121,7 +120,6 @@ export class List {
 		elementInput.setAttribute("placeholder", this._secondPlaceholder);
 		elementInput.classList.add("change");
 		this.activateListItems();
-
 	}
 
 	/**
@@ -158,7 +156,7 @@ export class List {
 
 	/**
 	 * Supprimer un élément de la liste suite à sa sélection en tag
-	 * @param {*} itemName 
+	 * @param {*} itemName
 	 */
 	removeListItem(itemName) {
 		const myIndex = this._elements.indexOf(itemName);
@@ -169,19 +167,19 @@ export class List {
 
 	/**
 	 * Ajouter un élément de la liste suite à une suppression de tag
-	 * @param {*} itemName 
+	 * @param {*} itemName
 	 */
 	addListItem(itemName) {
 		const myIndex = this._elements.indexOf(itemName);
 		if (myIndex === -1) {
 			this._elements.push(itemName);
 			this._elements.sort();
-		} 
+		}
 	}
 
 	/**
 	 * Mise à jour de la liste suite à une liste de recettes modifiée
-	 * @param {*} tabList 
+	 * @param {*} tabList
 	 */
 	updateList(tabList) {
 		// Nettoyage de la liste des ingredients: accents et fautes d'orthographe
@@ -196,7 +194,7 @@ export class List {
 		document.getElementById(this._menuId).classList.remove(this._widthClass, "input-extendedwidth");
 		document.getElementById(this._btnId).childNodes[1].style.transform = "rotate(0deg)";
 		document.getElementById(this._dataType).value = "";
-		document.getElementById(this._dataType).setAttribute("placeholder", this._firstPlaceholder );
+		document.getElementById(this._dataType).setAttribute("placeholder", this._firstPlaceholder);
 		document.getElementById(this._dataType).classList.remove("change");
 
 		this._actives = this._elements;

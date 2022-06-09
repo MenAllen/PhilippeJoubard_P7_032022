@@ -15,6 +15,7 @@ export function clearString(stringArray) {
 	const tabCorrections = [
 		["casserolle", "casserole"],
 		["Casserolle", "Casserole"],
+		["Casserolle.", "Casserole"],
 		["Crème Fraiche", "Crème fraîche"],
 		["Crème fraiche", "Crème fraîche"],
 		["Crème Fraîche", "Crème fraîche"],
@@ -30,6 +31,8 @@ export function clearString(stringArray) {
 		["huile d'olive", "Huile d'olive"],
 		["huile d'olives", "Huile d'olive"],
 		["gruyère râpé", "Gruyère râpé"],
+		["Petits poids", "Petits pois"],
+		["Poudre d'amendes", "Poudre d'amandes"]
 	];
 
 	// Enlever les "s" pour éviter les doublons

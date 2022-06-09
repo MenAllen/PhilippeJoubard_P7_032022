@@ -23,12 +23,12 @@
 }
 
 .c-white {
-  color: white!important;
+	color: white !important;
 }
 
 .font-Lato18 {
 	font-family: Lato, sans-serif;
-  font-style:normal;
+	font-style: normal;
 	font-weight: 400;
 	font-size: 18px;
 	line-height: 22px;
@@ -91,7 +91,7 @@ footer p {
 }
 
 .form-control:focus {
-  color: grey;
+	color: grey;
 }
 
 .card-Format {
@@ -101,15 +101,15 @@ footer p {
 }
 
 #btnIngredients:hover,
- #btnAppliances:hover,
-  #btnUstensils:hover,
-   #closetag:hover {
-  cursor: pointer;
+#btnAppliances:hover,
+#btnUstensils:hover,
+#closetag:hover {
+	cursor: pointer;
 }
 
 .input-Search {
 	border: none;
-	border-radius: 5px!important;
+	border-radius: 5px !important;
 	background-color: #e7e7e7 !important;
 	height: 69px;
 }
@@ -134,7 +134,7 @@ footer p {
 
 .input-Filters {
 	border: none;
-	border-radius: 5px!important;
+	border-radius: 5px !important;
 	color: #ffffff;
 	height: 69px;
 }
@@ -159,89 +159,89 @@ footer p {
 }
 
 .input-Format {
-  position: relative;
+	position: relative;
 	width: 194px;
 	padding: 12px;
 }
 
 .ingredients-extendedwidth {
-  width: 760px;
+	width: 760px;
 }
 
 .appliances-extendedwidth {
-  width: 626px;
+	width: 626px;
 }
 
 .ustensils-extendedwidth {
-  width: 737px;
+	width: 737px;
 }
 
 .ingredients-list-item,
- .appliances-list-item,
-  .ustensils-list-item {
-  cursor: pointer;
+.appliances-list-item,
+.ustensils-list-item {
+	cursor: pointer;
 }
 
 .listIngredients {
-  display: none;
-  grid-template-columns: repeat(3, 2fr);
-  grid-template-rows: 1fr;
+	display: none;
+	grid-template-columns: repeat(3, 2fr);
+	grid-template-rows: 1fr;
 	border-radius: 0 0 5px 5px;
-  align-items: center;
-  gap: 0.5rem 5rem;
-  position: absolute;
-  top: 75%;
+	align-items: center;
+	gap: 0.5rem 5rem;
+	position: absolute;
+	top: 75%;
 	width: 737px;
-  z-index: 10;
+	z-index: 10;
 	max-height: 360px;
 	overflow-y: scroll;
 	scrollbar-width: none;
 }
 
 .inputList {
-  grid-template-columns: repeat(1, 2fr)!important;
-  gap: 0.5rem 2rem!important;
-	max-width: 246px!important;
+	grid-template-columns: repeat(1, 2fr) !important;
+	gap: 0.5rem 2rem !important;
+	max-width: 246px !important;
 }
 
 .input-extendedwidth {
-	width: 269px!important;
+	width: 269px !important;
 }
 
 .listAppliances {
 	display: none;
-  grid-template-columns: repeat(3, 2fr);
-  grid-template-rows: 1fr;
+	grid-template-columns: repeat(3, 2fr);
+	grid-template-rows: 1fr;
 	border-radius: 0 0 5px 5px;
-  align-items: center;
-  gap: 0.5rem 5rem;
-  position: absolute;
-  top: 75%;
-  width: 603px;
-  z-index: 10;
+	align-items: center;
+	gap: 0.5rem 5rem;
+	position: absolute;
+	top: 75%;
+	width: 603px;
+	z-index: 10;
 	max-height: 360px;
 	overflow-y: scroll;
 	scrollbar-width: none;
 }
 
- .listUstensils {
+.listUstensils {
 	display: none;
-  grid-template-columns: repeat(3, 2fr);
-  grid-template-rows: 1fr;
+	grid-template-columns: repeat(3, 2fr);
+	grid-template-rows: 1fr;
 	border-radius: 0 0 5px 5px;
-  align-items: center;
-  gap: 0.5rem 4rem;
-  position: absolute;
-  top: 75%;
-  width: 714px;
-  z-index: 10;
+	align-items: center;
+	gap: 0.5rem 4rem;
+	position: absolute;
+	top: 75%;
+	width: 714px;
+	z-index: 10;
 	max-height: 360px;
 	overflow-y: scroll;
 	scrollbar-width: none;
 }
 
 .items-display {
-  display: grid!important;
+	display: grid !important;
 }
 
 .container-Recipes {
@@ -250,24 +250,24 @@ footer p {
 }
 
 .card-Recipe-name {
-  width: 230px;
-  margin-bottom: 0!important;
+	width: 230px;
+	margin-bottom: 0 !important;
 }
 
 .card-Recipe-ingredients {
-  width: 171px;
+	width: 171px;
 	height: 111px;
-  display: block;
+	display: block;
 }
 
 .card-Recipe-description {
-  width: 171px;
+	width: 171px;
 	height: 111px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 8;
-  -webkit-box-orient: vertical;  
+	display: -webkit-box;
+	-webkit-line-clamp: 8;
+	-webkit-box-orient: vertical;
 }
 
 .row-Recipes {
@@ -275,19 +275,19 @@ footer p {
 }
 
 .blockTags-item {
-  height: 37px;
-  border: none;
+	height: 37px;
+	border: none;
 	border-radius: 5px;
-  color: white;
-  padding: 0 0.5rem;
-  margin-right: 1rem;
+	color: white;
+	padding: 0 0.5rem;
+	margin-right: 1rem;
 }
 
 #noRecipes {
-  font-size: 1.5rem;
-  width: auto;
-  margin: 2rem auto;
-  color: #D04F4F;
+	font-size: 1.5rem;
+	width: auto;
+	margin: 2rem auto;
+	color: #d04f4f;
 }
 
 /**********************************************************************************************/
@@ -313,17 +313,18 @@ footer p {
 		width: 576px;
 	}
 
-	.listAppliances, .listUstensils {
+	.listAppliances,
+	.listUstensils {
 		grid-template-columns: repeat(2, 2fr);
 		grid-template-rows: 1fr;
 		gap: 0.5rem 2rem;
 		max-width: 510px;
 	}
 
-	.appliances-extendedwidth, .ustensils-extendedwidth {
+	.appliances-extendedwidth,
+	.ustensils-extendedwidth {
 		width: 533px;
 	}
-
 }
 
 @media (max-width: 585px) {
@@ -339,15 +340,16 @@ footer p {
 		width: 270px;
 	}
 
-	.listAppliances, .listUstensils {
+	.listAppliances,
+	.listUstensils {
 		grid-template-columns: repeat(1, 2fr);
 		grid-template-rows: 1fr;
 		gap: 0.5rem 2rem;
 		max-width: 247px;
 	}
 
-	.appliances-extendedwidth, .ustensils-extendedwidth {
+	.appliances-extendedwidth,
+	.ustensils-extendedwidth {
 		width: 270px;
 	}
-
 }
