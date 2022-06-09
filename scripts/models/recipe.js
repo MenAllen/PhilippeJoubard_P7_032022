@@ -81,7 +81,7 @@ export class Recipe {
 			this._name.toLowerCase().includes(paramString.toLowerCase()) ||
 			this._description.toLowerCase().includes(paramString.toLowerCase()) ||
 			this._ingredients.some((item) => {
-				item.ingredient.toLowerCase().includes(paramString.toLowerCase());
+				return item.ingredient.toLowerCase().includes(paramString.toLowerCase());
 			})
 		);
 	}

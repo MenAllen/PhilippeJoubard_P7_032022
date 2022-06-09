@@ -1,4 +1,4 @@
-# Base de code du projet P7 - Parcours Front-end
+# Base de code du projet P7 - Parcours Front-end (branche main)
 Développer un algorithme de recherche pour un site de recettes de cuisine en JavaScript. L'objectif est de permettre une recherche à partir d'une expression texte et / ou à partir de pré-selection de tags correspondant au ingrédients, aux appareils et aux ustensiles utilisés pour la recette.
 
 Il sera réalisé deux versions de cet algorithme, l'une basée sur une recherche fonctionnelle (.filter, .map, .forEach, .find, .some), l'autre basée sur des boucles de recherche (for.., while, ...). Des tests sont effectués pour sélectionner, dans le cas de la recherche nominale (pas de tags sélectionnés), la version la plus performante
